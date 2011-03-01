@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  *
  * @author geoma48p
  */
-public class RequestThread implements IHelpService, Runnable {
+public class RequestThread implements Runnable {
 
     private final IMapPanel panel;
     private final Socket socket;
@@ -43,9 +43,9 @@ public class RequestThread implements IHelpService, Runnable {
         int machineId = Integer.parseInt(messageBits[1]);
 
         if (performative.equals("request")) {
-            panel.requestHelp(machineId);
+            panel.getProcessor().request(machineId);
         } else {
-            panel.cancelRequest(machineId);
+            panel.getProcessor().cancel(machineId);
         }
 
     }

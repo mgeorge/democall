@@ -4,7 +4,7 @@
  */
 package client;
 
-import java.awt.AWTException;
+import constants.Constants;
 import java.awt.Image;
 import java.awt.MenuItem;
 import java.awt.PopupMenu;
@@ -13,11 +13,15 @@ import java.awt.Toolkit;
 import java.awt.TrayIcon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
+import java.util.Timer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -25,65 +29,141 @@ import java.net.UnknownHostException;
  */
 public class Client {
 
-   private static void sendRequest(String request) throws Exception {
-      Socket socket = new Socket("127.0.0.1", 7321);
+   private String ip;
+   private PopupMenu popup = new PopupMenu();
+   private Image image = Toolkit.getDefaultToolkit().getImage("icon.png");
+   private final TrayIcon trayIcon = new TrayIcon(image, "Request Help", popup);
+   private String machine;
+
+   public Client() {
+      try {
+         createTrayMenu();
+         addShutdownHook();
+
+//      String compName = System.getenv("COMPUTERNAME");
+         String compName = "SB306-13";
+
+
+         String[] nameBits = compName.split("-");
+         final String lab = nameBits[0];
+         machine = nameBits[1];
+
+         if (compName == null || nameBits.length < 2) {
+            trayIcon.displayMessage("Whoops", "COMPUTERNAME environment variable is not set or not in the correct format.", TrayIcon.MessageType.ERROR);
+         }
+
+
+         // create a timer to cause a timeout if server IP not found within 5 seconds
+         Timer timer = new Timer();
+         timer.schedule(new TimeoutTask(trayIcon), 5000);
+         ip = findServerIP(lab);
+
+         // we received a response so cancel timer
+         timer.cancel();
+
+      } catch (Exception ex) {
+         Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+      }
+
+
+   }
+
+   private void createTrayMenu() {
+      try {
+         trayIcon.setImageAutoSize(true);
+         MenuItem request = new MenuItem("Request Help");
+         request.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+               makeRequest();
+            }
+         });
+         final MenuItem cancel = new MenuItem("Cancel Request");
+         cancel.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+               cancelRequest();
+            }
+         });
+         MenuItem exit = new MenuItem("Exit");
+         exit.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+               exit();
+            }
+         });
+         popup.add(request);
+         popup.add(cancel);
+         popup.addSeparator();
+         popup.add(exit);
+         SystemTray.getSystemTray().add(trayIcon);
+      } catch (Exception ex) {
+         Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+      }
+   }
+
+   private void sendRequest(String request) throws Exception {
+      Socket socket = new Socket(ip, Constants.PORT);
       PrintWriter writer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
       writer.println(request);
       writer.flush();
       writer.close();
    }
 
-   public static void main(String[] args) throws UnknownHostException, IOException, AWTException {
+   private String findServerIP(String lab) throws Exception {
+      DatagramSocket socket = new DatagramSocket();
+      InetAddress address = InetAddress.getByName(Constants.BROADCAST_ADDRESS);
+      byte[] data = lab.getBytes();
+      int port = Constants.PORT;
+      socket.send(new DatagramPacket(data, data.length, address, port));
 
-      PopupMenu popup = new PopupMenu();
-      Image image = Toolkit.getDefaultToolkit().getImage("icon.png");
-      final TrayIcon icon = new TrayIcon(image, "Request Help", popup);
-      icon.setImageAutoSize(true);
+      byte[] response = new byte[256];
+      DatagramPacket packet = new DatagramPacket(response, response.length);
 
-      MenuItem request = new MenuItem("Request Help");
-      request.addActionListener(new ActionListener() {
+      socket.receive(packet);
+      String serverIp = new String(packet.getData()).trim();
+      socket.close();
 
-         public void actionPerformed(ActionEvent e) {
-            try {
-               sendRequest("request 14");
-               icon.displayMessage("Success", "Request sent", TrayIcon.MessageType.INFO);
-            } catch (Exception ex) {
-               icon.displayMessage("Whoops", "Failed to make request", TrayIcon.MessageType.ERROR);
-            }
+      return serverIp;
+   }
+
+   private void addShutdownHook() {
+      Runtime.getRuntime().addShutdownHook(new Thread() {
+
+         @Override
+         public void run() {
+            exit();
          }
       });
+   }
 
+   private void makeRequest() {
+      try {
+         sendRequest("request " + machine);
+         trayIcon.displayMessage("Success", "Request sent", TrayIcon.MessageType.INFO);
+      } catch (Exception ex) {
+         trayIcon.displayMessage("Whoops", "Failed to make request", TrayIcon.MessageType.ERROR);
+         Logger.getLogger(Client.class.getName()).log(Level.SEVERE, "Error making request", ex);
+      }
+   }
 
-      MenuItem cancel = new MenuItem("Cancel Request");
-      cancel.addActionListener(new ActionListener() {
+   private void cancelRequest() {
+      try {
+         sendRequest("cancel " + machine);
+         trayIcon.displayMessage("Success", "Request cancelled", TrayIcon.MessageType.INFO);
+      } catch (Exception ex) {
+         trayIcon.displayMessage("Whoops", "Failed to cancel request", TrayIcon.MessageType.ERROR);
+         Logger.getLogger(Client.class.getName()).log(Level.SEVERE, "Error cancelling request", ex);
+      }
+   }
 
-         public void actionPerformed(ActionEvent e) {
-            try {
-               sendRequest("cancel 14");
-               icon.displayMessage("Success", "Request cancelled", TrayIcon.MessageType.INFO);
-            } catch (Exception ex) {
-               icon.displayMessage("Whoops", "Failed to cancel request", TrayIcon.MessageType.ERROR);
-            }
-         }
-      });
+   private void exit() {
+      cancelRequest();
+      SystemTray.getSystemTray().remove(trayIcon);
+      System.exit(0);
+   }
 
-
-      MenuItem exit = new MenuItem("Exit");
-      exit.addActionListener(new ActionListener() {
-
-         public void actionPerformed(ActionEvent e) {
-            System.exit(0);
-         }
-      });
-
-      popup.add(request);
-      popup.add(cancel);
-      popup.addSeparator();
-      popup.add(exit);
-
-
-      SystemTray tray = SystemTray.getSystemTray();
-      tray.add(icon);
-
+   public static void main(String[] args) throws Exception {
+      new Client();
    }
 }

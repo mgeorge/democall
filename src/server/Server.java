@@ -6,8 +6,6 @@ package server;
 
 import gui.MapPanel303;
 import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
 import javax.swing.JFrame;
 
 /**
@@ -17,7 +15,11 @@ import javax.swing.JFrame;
 public class Server {
 
    public static void main(String[] args) throws IOException {
-      System.out.println("Server");
+
+//      String compName = System.getenv("COMPUTERNAME");
+      String compName = "SB306-23";
+      String[] nameBits = compName.split("-");
+      final String lab = nameBits[0];
 
       JFrame frame = new JFrame();
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -26,14 +28,7 @@ public class Server {
       frame.pack();
       frame.setVisible(true);
 
-      ServerSocket ss = new ServerSocket(7321);
-
-      while (true) {
-         Socket socket = ss.accept();
-
-         Thread thread = new Thread(new RequestThread(panel, socket));
-         thread.setDaemon(true);
-         thread.start();
-      }
+      new ApplicationHandler(panel).start();
+      new BroadcastResponder(lab).start();
    }
 }

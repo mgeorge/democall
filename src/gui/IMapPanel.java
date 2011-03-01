@@ -5,14 +5,19 @@
 
 package gui;
 
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 /**
  *
  * @author geoma48p
  */
 public interface IMapPanel {
 
-    public void requestHelp(int id);
-    
-    public void cancelRequest(int id);
+    public JLabel getQueueLabel();
+
+    public JPanel getPanel();
+
+    public LabelProcessor getProcessor();
 
 }
