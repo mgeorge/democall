@@ -19,14 +19,14 @@
           <Group type="102" attributes="0">
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lblQueue" alignment="0" pref="522" max="32767" attributes="0"/>
+                  <Component id="lblQueue" alignment="0" pref="435" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Component id="jPanel1" pref="247" max="32767" attributes="0"/>
+                      <Component id="jPanel1" pref="204" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="28" max="-2" attributes="1"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="lblBottomSpacer" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="lblTopSpacer" min="-2" pref="53" max="-2" attributes="0"/>
-                          <Component id="jPanel2" alignment="1" pref="247" max="32767" attributes="0"/>
+                          <Component id="jPanel2" alignment="1" pref="203" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -44,11 +44,11 @@
                   <Group type="102" attributes="0">
                       <Component id="lblTopSpacer" min="-2" pref="16" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jPanel2" pref="305" max="32767" attributes="2"/>
+                      <Component id="jPanel2" pref="296" max="32767" attributes="2"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblBottomSpacer" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jPanel1" alignment="0" pref="343" max="32767" attributes="2"/>
+                  <Component id="jPanel1" alignment="0" pref="334" max="32767" attributes="2"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -68,7 +68,7 @@
         <Property name="verticalGap" type="int" value="5"/>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jButton2">
+        <Component class="javax.swing.JLabel" name="lblMachine2">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="1"/>
@@ -80,10 +80,10 @@
                 <LineBorder/>
               </Border>
             </Property>
-            <Property name="name" type="java.lang.String" value="jButton2" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="lblMachine2" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jButton3">
+        <Component class="javax.swing.JLabel" name="lblMachine3">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="1"/>
@@ -95,10 +95,10 @@
                 <LineBorder/>
               </Border>
             </Property>
-            <Property name="name" type="java.lang.String" value="jButton3" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="lblMachine3" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jButton7">
+        <Component class="javax.swing.JLabel" name="lblMachine7">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="1"/>
@@ -110,10 +110,10 @@
                 <LineBorder/>
               </Border>
             </Property>
-            <Property name="name" type="java.lang.String" value="jButton7" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="lblMachine7" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jButton12">
+        <Component class="javax.swing.JLabel" name="lblMachine12">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="1"/>
@@ -125,10 +125,10 @@
                 <LineBorder/>
               </Border>
             </Property>
-            <Property name="name" type="java.lang.String" value="jButton12" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="lblMachine12" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jButton4">
+        <Component class="javax.swing.JLabel" name="lblMachine4">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="1"/>
@@ -140,10 +140,10 @@
                 <LineBorder/>
               </Border>
             </Property>
-            <Property name="name" type="java.lang.String" value="jButton4" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="lblMachine4" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jButton5">
+        <Component class="javax.swing.JLabel" name="lblMachine5">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="1"/>
@@ -155,10 +155,10 @@
                 <LineBorder/>
               </Border>
             </Property>
-            <Property name="name" type="java.lang.String" value="jButton5" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="lblMachine5" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jButton6">
+        <Component class="javax.swing.JLabel" name="lblMachine6">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="1"/>
@@ -170,10 +170,10 @@
                 <LineBorder/>
               </Border>
             </Property>
-            <Property name="name" type="java.lang.String" value="jButton6" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="lblMachine6" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jButton8">
+        <Component class="javax.swing.JLabel" name="lblMachine8">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="1"/>
@@ -185,10 +185,10 @@
                 <LineBorder/>
               </Border>
             </Property>
-            <Property name="name" type="java.lang.String" value="jButton8" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="lblMachine8" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jButton9">
+        <Component class="javax.swing.JLabel" name="lblMachine9">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="1"/>
@@ -200,10 +200,10 @@
                 <LineBorder/>
               </Border>
             </Property>
-            <Property name="name" type="java.lang.String" value="jButton9" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="lblMachine9" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jButton10">
+        <Component class="javax.swing.JLabel" name="lblMachine10">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="1"/>
@@ -215,10 +215,10 @@
                 <LineBorder/>
               </Border>
             </Property>
-            <Property name="name" type="java.lang.String" value="jButton10" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="lblMachine10" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jButton11">
+        <Component class="javax.swing.JLabel" name="lblMachine11">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="1"/>
@@ -230,10 +230,10 @@
                 <LineBorder/>
               </Border>
             </Property>
-            <Property name="name" type="java.lang.String" value="jButton11" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="lblMachine11" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jButton13">
+        <Component class="javax.swing.JLabel" name="lblMachine13">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="1"/>
@@ -245,10 +245,10 @@
                 <LineBorder/>
               </Border>
             </Property>
-            <Property name="name" type="java.lang.String" value="jButton13" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="lblMachine13" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jButton14">
+        <Component class="javax.swing.JLabel" name="lblMachine14">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="1"/>
@@ -260,10 +260,10 @@
                 <LineBorder/>
               </Border>
             </Property>
-            <Property name="name" type="java.lang.String" value="jButton14" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="lblMachine14" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jButton15">
+        <Component class="javax.swing.JLabel" name="lblMachine15">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="1"/>
@@ -275,10 +275,10 @@
                 <LineBorder/>
               </Border>
             </Property>
-            <Property name="name" type="java.lang.String" value="jButton15" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="lblMachine15" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jButton16">
+        <Component class="javax.swing.JLabel" name="lblMachine16">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="1"/>
@@ -290,10 +290,10 @@
                 <LineBorder/>
               </Border>
             </Property>
-            <Property name="name" type="java.lang.String" value="jButton16" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="lblMachine16" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jButton32">
+        <Component class="javax.swing.JLabel" name="lblMachine32">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="1"/>
@@ -305,10 +305,10 @@
                 <LineBorder/>
               </Border>
             </Property>
-            <Property name="name" type="java.lang.String" value="jButton32" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="lblMachine32" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jButton33">
+        <Component class="javax.swing.JLabel" name="lblMachine33">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="1"/>
@@ -320,10 +320,10 @@
                 <LineBorder/>
               </Border>
             </Property>
-            <Property name="name" type="java.lang.String" value="jButton33" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="lblMachine33" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jButton34">
+        <Component class="javax.swing.JLabel" name="lblMachine34">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="1"/>
@@ -335,7 +335,7 @@
                 <LineBorder/>
               </Border>
             </Property>
-            <Property name="name" type="java.lang.String" value="jButton34" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="lblMachine34" noResource="true"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -352,7 +352,7 @@
         <Property name="verticalGap" type="int" value="5"/>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jButton17">
+        <Component class="javax.swing.JLabel" name="lblMachine17">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="1"/>
@@ -364,10 +364,10 @@
                 <LineBorder/>
               </Border>
             </Property>
-            <Property name="name" type="java.lang.String" value="jButton17" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="lblMachine17" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jButton18">
+        <Component class="javax.swing.JLabel" name="lblMachine18">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="1"/>
@@ -379,10 +379,10 @@
                 <LineBorder/>
               </Border>
             </Property>
-            <Property name="name" type="java.lang.String" value="jButton18" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="lblMachine18" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jButton19">
+        <Component class="javax.swing.JLabel" name="lblMachine19">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="1"/>
@@ -394,10 +394,10 @@
                 <LineBorder/>
               </Border>
             </Property>
-            <Property name="name" type="java.lang.String" value="jButton19" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="lblMachine19" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jButton20">
+        <Component class="javax.swing.JLabel" name="lblMachine20">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="1"/>
@@ -409,10 +409,10 @@
                 <LineBorder/>
               </Border>
             </Property>
-            <Property name="name" type="java.lang.String" value="jButton20" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="lblMachine20" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jButton21">
+        <Component class="javax.swing.JLabel" name="lblMachine21">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="1"/>
@@ -424,10 +424,10 @@
                 <LineBorder/>
               </Border>
             </Property>
-            <Property name="name" type="java.lang.String" value="jButton21" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="lblMachine21" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jButton22">
+        <Component class="javax.swing.JLabel" name="lblMachine22">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="1"/>
@@ -439,10 +439,10 @@
                 <LineBorder/>
               </Border>
             </Property>
-            <Property name="name" type="java.lang.String" value="jButton22" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="lblMachine22" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jButton23">
+        <Component class="javax.swing.JLabel" name="lblMachine23">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="1"/>
@@ -454,10 +454,10 @@
                 <LineBorder/>
               </Border>
             </Property>
-            <Property name="name" type="java.lang.String" value="jButton23" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="lblMachine23" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jButton24">
+        <Component class="javax.swing.JLabel" name="lblMachine24">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="1"/>
@@ -469,10 +469,10 @@
                 <LineBorder/>
               </Border>
             </Property>
-            <Property name="name" type="java.lang.String" value="jButton24" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="lblMachine24" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jButton25">
+        <Component class="javax.swing.JLabel" name="lblMachine25">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="1"/>
@@ -484,10 +484,10 @@
                 <LineBorder/>
               </Border>
             </Property>
-            <Property name="name" type="java.lang.String" value="jButton25" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="lblMachine25" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jButton26">
+        <Component class="javax.swing.JLabel" name="lblMachine26">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="1"/>
@@ -499,10 +499,10 @@
                 <LineBorder/>
               </Border>
             </Property>
-            <Property name="name" type="java.lang.String" value="jButton26" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="lblMachine26" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jButton27">
+        <Component class="javax.swing.JLabel" name="lblMachine27">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="1"/>
@@ -514,10 +514,10 @@
                 <LineBorder/>
               </Border>
             </Property>
-            <Property name="name" type="java.lang.String" value="jButton27" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="lblMachine27" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jButton28">
+        <Component class="javax.swing.JLabel" name="lblMachine28">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="1"/>
@@ -529,10 +529,10 @@
                 <LineBorder/>
               </Border>
             </Property>
-            <Property name="name" type="java.lang.String" value="jButton28" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="lblMachine28" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jButton29">
+        <Component class="javax.swing.JLabel" name="lblMachine29">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="1"/>
@@ -544,10 +544,10 @@
                 <LineBorder/>
               </Border>
             </Property>
-            <Property name="name" type="java.lang.String" value="jButton29" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="lblMachine29" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jButton30">
+        <Component class="javax.swing.JLabel" name="lblMachine30">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="1"/>
@@ -559,10 +559,10 @@
                 <LineBorder/>
               </Border>
             </Property>
-            <Property name="name" type="java.lang.String" value="jButton30" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="lblMachine30" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jButton31">
+        <Component class="javax.swing.JLabel" name="lblMachine31">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="36" style="1"/>
@@ -574,7 +574,7 @@
                 <LineBorder/>
               </Border>
             </Property>
-            <Property name="name" type="java.lang.String" value="jButton31" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="lblMachine31" noResource="true"/>
           </Properties>
         </Component>
       </SubComponents>

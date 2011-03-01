@@ -4,9 +4,10 @@
  */
 package server;
 
-import gui.MapPanel303;
+import gui.PanelRegistry;
 import java.io.IOException;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
@@ -17,13 +18,15 @@ public class Server {
    public static void main(String[] args) throws IOException {
 
 //      String compName = System.getenv("COMPUTERNAME");
-      String compName = "SB306-23";
+      String compName = "SB303-23";
       String[] nameBits = compName.split("-");
       final String lab = nameBits[0];
 
       JFrame frame = new JFrame();
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      MapPanel303 panel = new MapPanel303();
+
+      JPanel panel = new PanelRegistry().getPanel(lab);
+
       frame.add(panel);
       frame.pack();
       frame.setVisible(true);

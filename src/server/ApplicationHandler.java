@@ -5,6 +5,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JPanel;
 
 /**
  *
@@ -14,8 +15,8 @@ public class ApplicationHandler extends Thread {
 
    private final IMapPanel panel;
 
-   public ApplicationHandler(IMapPanel panel) {
-      this.panel = panel;
+   public ApplicationHandler(JPanel panel) {
+      this.panel = (IMapPanel) panel;
       setDaemon(true);
    }
 
