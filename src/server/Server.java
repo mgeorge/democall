@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
 
 /**
  *
@@ -32,7 +31,9 @@ public class Server {
       while (true) {
          Socket socket = ss.accept();
 
-         new Thread(new RequestThread(panel, socket)).start();
+         Thread thread = new Thread(new RequestThread(panel, socket));
+         thread.setDaemon(true);
+         thread.start();
       }
    }
 }
