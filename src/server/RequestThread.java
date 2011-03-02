@@ -16,37 +16,38 @@ import java.util.logging.Logger;
  *
  * @author geoma48p
  */
-public class RequestThread implements Runnable {
+public class RequestThread extends Thread {
 
-    private final IMapPanel panel;
-    private final Socket socket;
+   private final IMapPanel panel;
+   private final Socket socket;
 
-    public RequestThread(IMapPanel panel, Socket socket) {
-        this.panel = panel;
-        this.socket = socket;
-    }
+   public RequestThread(IMapPanel panel, Socket socket) {
+      this.setDaemon(true);
+      this.panel = panel;
+      this.socket = socket;
+   }
 
-    public void run() {
-        try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            String message = reader.readLine();
-            processMessage(message);
-        } catch (IOException ex) {
-            Logger.getLogger(RequestThread.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+   public void run() {
+      try {
+         BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+         String message = reader.readLine();
+         processMessage(message);
+      } catch (IOException ex) {
+         Logger.getLogger(RequestThread.class.getName()).log(Level.SEVERE, null, ex);
+      }
+   }
 
-    public void processMessage(String message) {
-        String[] messageBits = message.split(" ");
+   public void processMessage(String message) {
+      String[] messageBits = message.split(" ");
 
-        String performative = messageBits[0];
-        int machineId = Integer.parseInt(messageBits[1]);
+      String performative = messageBits[0];
+      int machineId = Integer.parseInt(messageBits[1]);
 
-        if (performative.equals("request")) {
-            panel.getProcessor().request(machineId);
-        } else {
-            panel.getProcessor().cancel(machineId);
-        }
+      if (performative.equals("request")) {
+         panel.getProcessor().request(machineId);
+      } else {
+         panel.getProcessor().cancel(machineId);
+      }
 
-    }
+   }
 }

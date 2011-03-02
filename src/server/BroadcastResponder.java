@@ -19,8 +19,8 @@ public class BroadcastResponder extends Thread {
    private String lab;
 
    public BroadcastResponder(String lab) {
-      this.lab = lab;
       this.setDaemon(true);
+      this.lab = lab;
    }
 
    @Override

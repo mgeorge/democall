@@ -34,14 +34,23 @@ public class Client {
    private Image image = Toolkit.getDefaultToolkit().getImage("icon.png");
    private final TrayIcon trayIcon = new TrayIcon(image, "Request Help", popup);
    private String machine;
+   private Thread shutDownHook = new Thread() {
+
+      @Override
+      public void run() {
+         exit();
+      }
+   };
 
    public Client() {
       try {
          createTrayMenu();
-         addShutdownHook();
 
-//      String compName = System.getenv("COMPUTERNAME");
-         String compName = "SB306-13";
+         shutDownHook.setDaemon(true);
+         Runtime.getRuntime().addShutdownHook(shutDownHook);
+
+//         String compName = System.getenv("COMPUTERNAME");
+         String compName = "SB303-13";
 
 
          String[] nameBits = compName.split("-");
@@ -108,6 +117,7 @@ public class Client {
       writer.println(request);
       writer.flush();
       writer.close();
+      socket.close();
    }
 
    private String findServerIP(String lab) throws Exception {
@@ -127,20 +137,11 @@ public class Client {
       return serverIp;
    }
 
-   private void addShutdownHook() {
-      Runtime.getRuntime().addShutdownHook(new Thread() {
-
-         @Override
-         public void run() {
-            exit();
-         }
-      });
-   }
 
    private void makeRequest() {
       try {
          sendRequest("request " + machine);
-         trayIcon.displayMessage("Success", "Request sent", TrayIcon.MessageType.INFO);
+         trayIcon.displayMessage("Help is on the way", "Your request is now in the queue.", TrayIcon.MessageType.INFO);
       } catch (Exception ex) {
          trayIcon.displayMessage("Whoops", "Failed to make request", TrayIcon.MessageType.ERROR);
          Logger.getLogger(Client.class.getName()).log(Level.SEVERE, "Error making request", ex);
@@ -150,7 +151,7 @@ public class Client {
    private void cancelRequest() {
       try {
          sendRequest("cancel " + machine);
-         trayIcon.displayMessage("Success", "Request cancelled", TrayIcon.MessageType.INFO);
+         trayIcon.displayMessage("Request removed", "Your request has been removed from the queue.", TrayIcon.MessageType.INFO);
       } catch (Exception ex) {
          trayIcon.displayMessage("Whoops", "Failed to cancel request", TrayIcon.MessageType.ERROR);
          Logger.getLogger(Client.class.getName()).log(Level.SEVERE, "Error cancelling request", ex);
@@ -158,8 +159,16 @@ public class Client {
    }
 
    private void exit() {
+      // cancel any requests the student has made
       cancelRequest();
+
+      // remove any shutdown hooks so we don't cause a deadlock when we call System.exit below
+      Runtime.getRuntime().removeShutdownHook(shutDownHook);
+
+      // remove the tray icon from the system tray
       SystemTray.getSystemTray().remove(trayIcon);
+
+      // force an exit since they are several threads lurking around that could keep the process running
       System.exit(0);
    }
 
