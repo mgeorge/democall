@@ -2,8 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
-package gui;
+package gui.maps;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -12,12 +11,10 @@ import javax.swing.JPanel;
  *
  * @author geoma48p
  */
-public interface IMapPanel {
+public abstract class AbstractMapPanel extends JPanel {
 
-    public JLabel getQueueLabel();
+   public abstract JLabel getQueueLabel();
 
-    public JPanel getPanel();
-
-    public LabelProcessor getProcessor();
+   public abstract JPanel getPanel();
 
 }

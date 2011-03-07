@@ -1,4 +1,4 @@
-package server;
+package discovery;
 
 import constants.Constants;
 import java.net.DatagramPacket;
@@ -58,16 +58,18 @@ public class BroadcastResponder extends Thread {
             for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {
                InetAddress inetAddress = enumIpAddr.nextElement();
                try {
-                  // quick hack to ensure we are only getting IPv4 addresses
+                  // FIXME: quick hack to ensure we are only getting IPv4 addresses - need to test what happens with IPv6 addresses in the labs
                   Inet4Address testIfIpv4 = (Inet4Address) inetAddress;
                   if (!inetAddress.isLoopbackAddress()) {
                      return inetAddress.getHostAddress().toString();
                   }
                } catch (ClassCastException ignored) {
+                  // ignored
                }
             }
          }
       } catch (Exception ex) {
+         Logger.getLogger(BroadcastResponder.class.getName()).log(Level.SEVERE, null, ex);
       }
       return null;
    }

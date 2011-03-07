@@ -4,10 +4,14 @@
  */
 package server;
 
-import gui.PanelRegistry;
+import discovery.BroadcastResponder;
+import gui.Lab;
+import gui.maps.AbstractMapPanel;
+import gui.processors.LabelProcessor;
+import gui.LabRegistry;
+import gui.processors.ServerLabelProcessor;
 import java.io.IOException;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 /**
  *
@@ -17,21 +21,27 @@ public class Server {
 
    public static void main(String[] args) throws IOException {
 
-//      String compName = System.getenv("COMPUTERNAME");
-      String compName = "SB303-23";
+      String compName = System.getenv("COMPUTERNAME");
+
       String[] nameBits = compName.split("-");
-      final String lab = nameBits[0];
+      final String labName = nameBits[0];
 
       JFrame frame = new JFrame();
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      
+      LabRegistry registry = new LabRegistry();
+      Lab lab = registry.getLab(labName);
+      AbstractMapPanel panel = lab.getPanel();
 
-      JPanel panel = new PanelRegistry().getPanel(lab);
+      LabelProcessor processor = new ServerLabelProcessor();
+      processor.processLabels(panel);
 
+      frame.setTitle(String.format("Democall 3 - Server (%1s)",lab.getLabDescription()));
       frame.add(panel);
       frame.pack();
       frame.setVisible(true);
 
-      new ApplicationHandler(panel).start();
-      new BroadcastResponder(lab).start();
+      new ApplicationHandler(processor).start();
+      new BroadcastResponder(labName).start();
    }
 }

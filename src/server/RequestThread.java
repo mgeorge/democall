@@ -4,10 +4,13 @@
  */
 package server;
 
-import gui.IMapPanel;
+import gui.processors.LabelProcessor;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,20 +21,22 @@ import java.util.logging.Logger;
  */
 public class RequestThread extends Thread {
 
-   private final IMapPanel panel;
+   private final LabelProcessor processor;
    private final Socket socket;
 
-   public RequestThread(IMapPanel panel, Socket socket) {
+   public RequestThread(LabelProcessor processor, Socket socket) {
       this.setDaemon(true);
-      this.panel = panel;
+      this.processor = processor;
       this.socket = socket;
    }
 
+   @Override
    public void run() {
       try {
          BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
          String message = reader.readLine();
          processMessage(message);
+         socket.close();
       } catch (IOException ex) {
          Logger.getLogger(RequestThread.class.getName()).log(Level.SEVERE, null, ex);
       }
@@ -44,9 +49,19 @@ public class RequestThread extends Thread {
       int machineId = Integer.parseInt(messageBits[1]);
 
       if (performative.equals("request")) {
-         panel.getProcessor().request(machineId);
+         processor.request(machineId);
+      } else if (performative.equals("cancel")) {
+         processor.cancel(machineId);
+      } else if (performative.equals("queue")) {
+         try {
+            ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+            oos.writeObject(processor.getQueue());
+            oos.close();
+         } catch (IOException ex) {
+            Logger.getLogger(RequestThread.class.getName()).log(Level.SEVERE, null, ex);
+         } 
       } else {
-         panel.getProcessor().cancel(machineId);
+         Logger.getLogger(RequestThread.class.getName()).log(Level.SEVERE, "Unknown performative: {0}", performative);
       }
 
    }
