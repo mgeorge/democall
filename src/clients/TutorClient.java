@@ -1,10 +1,12 @@
 package clients;
 
+import constants.Constants;
 import discovery.ServiceLocator;
 import gui.Lab;
-import gui.maps.AbstractMapPanel;
 import gui.LabRegistry;
+import gui.QueuePanel;
 import gui.processors.TutorLabelProcessor;
+import java.awt.BorderLayout;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -12,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import network.RequestSender;
 
 /**
@@ -23,12 +26,9 @@ public class TutorClient {
    private String serverIp;
 
    @SuppressWarnings("rawtypes")
-   public TutorClient() {
-
-
+   public TutorClient(String compName) {
 
       try {
-         String compName = System.getenv("COMPUTERNAME");
          String[] nameBits = compName.split("-");
          String labName = nameBits[0];
 
@@ -38,7 +38,8 @@ public class TutorClient {
 
          Lab lab = (Lab) JOptionPane.showInputDialog(null, "Which lab?", "Which lab?",  JOptionPane.QUESTION_MESSAGE, null, labs, currentLab);
          if(lab==null) {
-            System.exit(0);
+            JOptionPane.showMessageDialog(null, "There is no map for this lab yet.", "No map", JOptionPane.ERROR_MESSAGE);
+            System.exit(Constants.EXIT_NO_MAP_FOUND);
          } else {
             labName = lab.getLabName();
          }
@@ -46,11 +47,13 @@ public class TutorClient {
          serverIp = new ServiceLocator().locateServer(labName);
          JFrame frame = new JFrame();
          frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-         AbstractMapPanel panel = lab.getPanel();
+         JPanel mapPanel = lab.getPanel();
          final TutorLabelProcessor processor = new TutorLabelProcessor(serverIp);
-         processor.processLabels(panel);
-         frame.setTitle(String.format("Democall 3 - Tutor Client (%1s)", lab.getLabDescription()));
-         frame.add(panel);
+         processor.processLabels(mapPanel);
+         frame.setTitle(String.format("Democall %1s - Tutor Client (%1s)", Constants.VERSION, lab.getLabDescription()));
+         frame.setLayout(new BorderLayout());
+         frame.add(BorderLayout.NORTH, new QueuePanel());
+         frame.add(BorderLayout.CENTER, mapPanel);
          frame.pack();
          frame.setVisible(true);
 
@@ -62,7 +65,7 @@ public class TutorClient {
                Set<Integer> queue = new RequestSender(serverIp).requestQueue();
                processor.update(queue);
             }
-         }, 0, 5000);
+         }, 0, Constants.TUTOR_CLIENT_POLL);
 
       } catch (Exception ex) {
          Logger.getLogger(TutorClient.class.getName()).log(Level.SEVERE, null, ex);
@@ -71,6 +74,12 @@ public class TutorClient {
 
    @SuppressWarnings("ResultOfObjectAllocationIgnored")
    public static void main(String[] args) {
-      new TutorClient();
+      String compName = System.getenv("COMPUTERNAME");
+
+      if(args.length > 0) {
+         compName = args[0];
+      }
+      
+      new TutorClient(compName);
    }
 }

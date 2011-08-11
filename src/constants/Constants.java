@@ -6,12 +6,22 @@ package constants;
  */
 public class Constants {
 
+   // version number for system
+   public static final String VERSION = "3.1";
+
    // randomly chosen multi-cast group
-   public static String BROADCAST_ADDRESS = "233.7.2.9";
+   public static final String BROADCAST_ADDRESS = "233.7.2.9";
 
    // randomly chosen port
-   public static int PORT = 7321;
+   public static final int PORT = 7321;
 
-   public static int NO_SERVER_FOUND = 100;
+   // time between polls for tutor client (milliseconds)
+   public static final int TUTOR_CLIENT_POLL = 5000;
+
+   // exit code for clients if no server found
+   public static final int EXIT_NO_SERVER_FOUND = 100;
+
+   // exit code if no map found that matches current COMPUTERNAME env var
+   public static final int EXIT_NO_MAP_FOUND = 200;
 
 }

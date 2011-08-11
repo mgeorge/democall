@@ -4,6 +4,7 @@
  */
 package clients;
 
+import constants.Constants;
 import discovery.ServiceLocator;
 import java.awt.Image;
 import java.awt.MenuItem;
@@ -39,7 +40,7 @@ public class StudentClient {
 
    private final PopupMenu trayPopopMenu = new PopupMenu();
    private final Image trayIconImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icon.png"));
-   private final TrayIcon systemTrayIcon = new TrayIcon(trayIconImage, "Request Help", trayPopopMenu);
+   private final TrayIcon systemTrayIcon = new TrayIcon(trayIconImage, "Demo Call " + Constants.VERSION, trayPopopMenu);
    private final MessageGenerator generator = new MessageGenerator();
 
    private String serverIp;
@@ -54,10 +55,10 @@ public class StudentClient {
       public void run() {
          cleanUp();
       }
-      
+
    };
 
-   public StudentClient() {
+   public StudentClient(String compName) {
       try {
          createTrayMenu();
 
@@ -66,18 +67,17 @@ public class StudentClient {
 
          Runtime.getRuntime().addShutdownHook(this.shutDownHook);
 
-         // lab machines usually have a COMPUTERNAME in the form "labname-machineId", eg SB316-23
-         String compName = System.getenv("COMPUTERNAME");
-
          if (compName == null) {
             this.systemTrayIcon.displayMessage("Whoops", "COMPUTERNAME environment variable is not set.", TrayIcon.MessageType.ERROR);
-            
+
             // give user a chance to read message
             Thread.sleep(5000);
 
             // shutdown
             exit();
          }
+
+         // lab machines usually have a COMPUTERNAME in the form "labname-machineId", eg SB316-23
 
          // process computer name to extract lab and machine ID
          String[] nameBits = compName.split("-");
@@ -98,7 +98,7 @@ public class StudentClient {
          // create a timer to cause a timeout if server IP not found within 5 seconds
          Timer timer = new Timer();
          timer.schedule(new TimeoutTask(this.systemTrayIcon), 5000);
-         
+
          // find server IP (uses network multicast)
          this.serverIp =  new ServiceLocator().locateServer(lab);
 
@@ -118,7 +118,7 @@ public class StudentClient {
 
    private void createTrayMenu() {
       try {
-         
+
          this.systemTrayIcon.setImageAutoSize(true);
 
          MenuItem request = new MenuItem("Request Help");
@@ -145,7 +145,7 @@ public class StudentClient {
             public void actionPerformed(ActionEvent e) {
                exit();
             }
-            
+
          });
 
          this.trayPopopMenu.add(request);
@@ -199,6 +199,13 @@ public class StudentClient {
 
    @SuppressWarnings("ResultOfObjectAllocationIgnored")
    public static void main(String[] args) throws Exception {
-      new StudentClient();
+
+      String compName = System.getenv("COMPUTERNAME");
+
+      if(args.length > 0) {
+         compName = args[0];
+      }
+
+      new StudentClient(compName);
    }
 }

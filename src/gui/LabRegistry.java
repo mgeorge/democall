@@ -1,6 +1,5 @@
 package gui;
 
-import gui.maps.AbstractMapPanel;
 import gui.maps.MapPanel316;
 import gui.maps.MapPanelRabel;
 import gui.maps.MapPanel303;

@@ -1,6 +1,6 @@
 package gui;
 
-import gui.maps.AbstractMapPanel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -10,9 +10,9 @@ public class Lab implements Comparable<Lab>{
 
    private String labName;
    private String labDescription;
-   private AbstractMapPanel panel;
+   private JPanel panel;
 
-   public Lab(String labName, String labDescription, AbstractMapPanel panel) {
+   public Lab(String labName, String labDescription, JPanel panel) {
       this.labName = labName;
       this.labDescription = labDescription;
       this.panel = panel;
@@ -22,7 +22,7 @@ public class Lab implements Comparable<Lab>{
       return labName;
    }
 
-   public AbstractMapPanel getPanel() {
+   public JPanel getPanel() {
       return panel;
    }
 

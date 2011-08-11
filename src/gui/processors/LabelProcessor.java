@@ -4,16 +4,18 @@
  */
 package gui.processors;
 
-import gui.maps.AbstractMapPanel;
+import gui.QueuePanel;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.event.MouseAdapter;
-import java.util.Collections;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -26,16 +28,12 @@ public abstract class LabelProcessor {
    private Color requestCol = Color.GREEN;
    private Color regularCol = new JLabel().getBackground();
    private Map<Integer, JLabel> labels = new HashMap<Integer, JLabel>();
-   private Set<Integer> queue = new LinkedHashSet<Integer>();
-   private AbstractMapPanel mapPanel;
+   private final Set<Integer> queue = new LinkedHashSet<Integer>();
 
    public abstract MouseAdapter getMouseAdapter();
 
-   public void processLabels(AbstractMapPanel panel) {
-      this.mapPanel = panel;
-
-      processPanel(panel.getPanel());
-
+   public void processLabels(JPanel panel) {
+      processPanel(panel);
    }
 
    private void processPanel(JPanel panel) {
@@ -61,34 +59,30 @@ public abstract class LabelProcessor {
       }
    }
 
-   public void request(final int id) {
+   public synchronized void request(final int id) {
 
-      synchronized (queue) {
-         queue.add(id);
-      }
+      queue.add(id);
 
-      String queueStr = queue.toString();
-
-      mapPanel.getQueueLabel().setText(queueStr.substring(1, queueStr.length() - 1));
+      final String queueStr = queue.toString();
 
       final JLabel label = labels.get(id);
+
       EventQueue.invokeLater(new Runnable() {
 
          public void run() {
             label.setBackground(requestCol);
+            QueuePanel.getQueueLabel().setText(queueStr.substring(1, queueStr.length() - 1));
          }
       });
 
    }
 
-   public void cancel(int id) {
-      synchronized (queue) {
-         queue.remove(id);
-      }
-      
+   public synchronized void cancel(int id) {
+      queue.remove(id);
+
       String queueStr = queue.toString();
 
-      mapPanel.getQueueLabel().setText(queueStr.substring(1, queueStr.length() - 1));
+      QueuePanel.getQueueLabel().setText(queueStr.substring(1, queueStr.length() - 1));
 
       final JLabel label = labels.get(id);
 

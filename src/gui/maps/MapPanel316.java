@@ -10,14 +10,13 @@
  */
 package gui.maps;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
  *
  * @author geoma48p
  */
-public class MapPanel316 extends AbstractMapPanel {
+public class MapPanel316 extends JPanel {
 
    /** Creates new form MapPanel */
    public MapPanel316() {
@@ -33,7 +32,7 @@ public class MapPanel316 extends AbstractMapPanel {
    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
    private void initComponents() {
 
-      jPanel1 = new javax.swing.JPanel();
+      contentPanel = new javax.swing.JPanel();
       lblSpacer = new javax.swing.JLabel();
       lblMachine2 = new javax.swing.JLabel();
       lblMachine3 = new javax.swing.JLabel();
@@ -69,281 +68,272 @@ public class MapPanel316 extends AbstractMapPanel {
       lblMachine33 = new javax.swing.JLabel();
       lblMachine34 = new javax.swing.JLabel();
       lblMachine37 = new javax.swing.JLabel();
-      lblQueue = new javax.swing.JLabel();
 
-      jPanel1.setName("jPanel1"); // NOI18N
-      jPanel1.setLayout(new java.awt.GridLayout(5, 7, 5, 5));
+      contentPanel.setName("contentPanel"); // NOI18N
+      contentPanel.setLayout(new java.awt.GridLayout(5, 7, 5, 5));
 
-      lblSpacer.setFont(new java.awt.Font("Tahoma", 1, 40));
+      lblSpacer.setFont(new java.awt.Font("Tahoma", 1, 40)); // NOI18N
       lblSpacer.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       lblSpacer.setName("lblSpacer"); // NOI18N
-      jPanel1.add(lblSpacer);
+      contentPanel.add(lblSpacer);
 
       lblMachine2.setFont(new java.awt.Font("Tahoma", 1, 40));
       lblMachine2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       lblMachine2.setText("1");
       lblMachine2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
       lblMachine2.setName("lblMachine2"); // NOI18N
-      jPanel1.add(lblMachine2);
+      contentPanel.add(lblMachine2);
 
       lblMachine3.setFont(new java.awt.Font("Tahoma", 1, 40));
       lblMachine3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       lblMachine3.setText("2");
       lblMachine3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
       lblMachine3.setName("lblMachine3"); // NOI18N
-      jPanel1.add(lblMachine3);
+      contentPanel.add(lblMachine3);
 
       lblMachine7.setFont(new java.awt.Font("Tahoma", 1, 40));
       lblMachine7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       lblMachine7.setText("3");
       lblMachine7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
       lblMachine7.setName("lblMachine7"); // NOI18N
-      jPanel1.add(lblMachine7);
+      contentPanel.add(lblMachine7);
 
       lblMachine17.setFont(new java.awt.Font("Tahoma", 1, 40));
       lblMachine17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       lblMachine17.setText("4");
       lblMachine17.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
       lblMachine17.setName("lblMachine17"); // NOI18N
-      jPanel1.add(lblMachine17);
+      contentPanel.add(lblMachine17);
 
       lblMachine18.setFont(new java.awt.Font("Tahoma", 1, 40));
       lblMachine18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       lblMachine18.setText("5");
       lblMachine18.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
       lblMachine18.setName("lblMachine18"); // NOI18N
-      jPanel1.add(lblMachine18);
+      contentPanel.add(lblMachine18);
 
       lblMachine19.setFont(new java.awt.Font("Tahoma", 1, 40));
       lblMachine19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       lblMachine19.setText("6");
       lblMachine19.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
       lblMachine19.setName("lblMachine19"); // NOI18N
-      jPanel1.add(lblMachine19);
+      contentPanel.add(lblMachine19);
 
       lblMachine12.setFont(new java.awt.Font("Tahoma", 1, 40));
       lblMachine12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       lblMachine12.setText("7");
       lblMachine12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
       lblMachine12.setName("lblMachine12"); // NOI18N
-      jPanel1.add(lblMachine12);
+      contentPanel.add(lblMachine12);
 
       lblMachine4.setFont(new java.awt.Font("Tahoma", 1, 40));
       lblMachine4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       lblMachine4.setText("8");
       lblMachine4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
       lblMachine4.setName("lblMachine4"); // NOI18N
-      jPanel1.add(lblMachine4);
+      contentPanel.add(lblMachine4);
 
       lblMachine5.setFont(new java.awt.Font("Tahoma", 1, 40));
       lblMachine5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       lblMachine5.setText("9");
       lblMachine5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
       lblMachine5.setName("lblMachine5"); // NOI18N
-      jPanel1.add(lblMachine5);
+      contentPanel.add(lblMachine5);
 
       lblMachine20.setFont(new java.awt.Font("Tahoma", 1, 40));
       lblMachine20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       lblMachine20.setText("10");
       lblMachine20.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
       lblMachine20.setName("lblMachine20"); // NOI18N
-      jPanel1.add(lblMachine20);
+      contentPanel.add(lblMachine20);
 
       lblMachine21.setFont(new java.awt.Font("Tahoma", 1, 40));
       lblMachine21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       lblMachine21.setText("11");
       lblMachine21.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
       lblMachine21.setName("lblMachine21"); // NOI18N
-      jPanel1.add(lblMachine21);
+      contentPanel.add(lblMachine21);
 
       lblMachine22.setFont(new java.awt.Font("Tahoma", 1, 40));
       lblMachine22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       lblMachine22.setText("12");
       lblMachine22.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
       lblMachine22.setName("lblMachine22"); // NOI18N
-      jPanel1.add(lblMachine22);
+      contentPanel.add(lblMachine22);
 
       lblMachine6.setFont(new java.awt.Font("Tahoma", 1, 40));
       lblMachine6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       lblMachine6.setText("13");
       lblMachine6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
       lblMachine6.setName("lblMachine6"); // NOI18N
-      jPanel1.add(lblMachine6);
+      contentPanel.add(lblMachine6);
 
       lblMachine8.setFont(new java.awt.Font("Tahoma", 1, 40));
       lblMachine8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       lblMachine8.setText("14");
       lblMachine8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
       lblMachine8.setName("lblMachine8"); // NOI18N
-      jPanel1.add(lblMachine8);
+      contentPanel.add(lblMachine8);
 
       lblMachine9.setFont(new java.awt.Font("Tahoma", 1, 40));
       lblMachine9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       lblMachine9.setText("15");
       lblMachine9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
       lblMachine9.setName("lblMachine9"); // NOI18N
-      jPanel1.add(lblMachine9);
+      contentPanel.add(lblMachine9);
 
       lblMachine23.setFont(new java.awt.Font("Tahoma", 1, 40));
       lblMachine23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       lblMachine23.setText("16");
       lblMachine23.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
       lblMachine23.setName("lblMachine23"); // NOI18N
-      jPanel1.add(lblMachine23);
+      contentPanel.add(lblMachine23);
 
-      lblMachine24.setFont(new java.awt.Font("Tahoma", 1, 40));
+      lblMachine24.setFont(new java.awt.Font("Tahoma", 1, 40)); // NOI18N
       lblMachine24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       lblMachine24.setText("17");
       lblMachine24.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
       lblMachine24.setName("lblMachine24"); // NOI18N
-      jPanel1.add(lblMachine24);
+      contentPanel.add(lblMachine24);
 
       lblMachine25.setFont(new java.awt.Font("Tahoma", 1, 40));
       lblMachine25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       lblMachine25.setText("18");
       lblMachine25.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
       lblMachine25.setName("lblMachine25"); // NOI18N
-      jPanel1.add(lblMachine25);
+      contentPanel.add(lblMachine25);
 
       lblMachine10.setFont(new java.awt.Font("Tahoma", 1, 40));
       lblMachine10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       lblMachine10.setText("19");
       lblMachine10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
       lblMachine10.setName("lblMachine10"); // NOI18N
-      jPanel1.add(lblMachine10);
+      contentPanel.add(lblMachine10);
 
       lblMachine11.setFont(new java.awt.Font("Tahoma", 1, 40));
       lblMachine11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       lblMachine11.setText("20");
       lblMachine11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
       lblMachine11.setName("lblMachine11"); // NOI18N
-      jPanel1.add(lblMachine11);
+      contentPanel.add(lblMachine11);
 
       lblMachine13.setFont(new java.awt.Font("Tahoma", 1, 40));
       lblMachine13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       lblMachine13.setText("21");
       lblMachine13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
       lblMachine13.setName("lblMachine13"); // NOI18N
-      jPanel1.add(lblMachine13);
+      contentPanel.add(lblMachine13);
 
       lblMachine26.setFont(new java.awt.Font("Tahoma", 1, 40));
       lblMachine26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       lblMachine26.setText("22");
       lblMachine26.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
       lblMachine26.setName("lblMachine26"); // NOI18N
-      jPanel1.add(lblMachine26);
+      contentPanel.add(lblMachine26);
 
       lblMachine27.setFont(new java.awt.Font("Tahoma", 1, 40));
       lblMachine27.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       lblMachine27.setText("23");
       lblMachine27.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
       lblMachine27.setName("lblMachine27"); // NOI18N
-      jPanel1.add(lblMachine27);
+      contentPanel.add(lblMachine27);
 
       lblMachine28.setFont(new java.awt.Font("Tahoma", 1, 40));
       lblMachine28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       lblMachine28.setText("24");
       lblMachine28.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
       lblMachine28.setName("lblMachine28"); // NOI18N
-      jPanel1.add(lblMachine28);
+      contentPanel.add(lblMachine28);
 
       lblMachine14.setFont(new java.awt.Font("Tahoma", 1, 40));
       lblMachine14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       lblMachine14.setText("25");
       lblMachine14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
       lblMachine14.setName("lblMachine14"); // NOI18N
-      jPanel1.add(lblMachine14);
+      contentPanel.add(lblMachine14);
 
       lblMachine15.setFont(new java.awt.Font("Tahoma", 1, 40));
       lblMachine15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       lblMachine15.setText("26");
       lblMachine15.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
       lblMachine15.setName("lblMachine15"); // NOI18N
-      jPanel1.add(lblMachine15);
+      contentPanel.add(lblMachine15);
 
       lblMachine16.setFont(new java.awt.Font("Tahoma", 1, 40));
       lblMachine16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       lblMachine16.setText("27");
       lblMachine16.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
       lblMachine16.setName("lblMachine16"); // NOI18N
-      jPanel1.add(lblMachine16);
+      contentPanel.add(lblMachine16);
 
       lblMachine29.setFont(new java.awt.Font("Tahoma", 1, 40));
       lblMachine29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       lblMachine29.setText("28");
       lblMachine29.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
       lblMachine29.setName("lblMachine29"); // NOI18N
-      jPanel1.add(lblMachine29);
+      contentPanel.add(lblMachine29);
 
       lblMachine30.setFont(new java.awt.Font("Tahoma", 1, 40));
       lblMachine30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       lblMachine30.setText("29");
       lblMachine30.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
       lblMachine30.setName("lblMachine30"); // NOI18N
-      jPanel1.add(lblMachine30);
+      contentPanel.add(lblMachine30);
 
       lblMachine31.setFont(new java.awt.Font("Tahoma", 1, 40));
       lblMachine31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       lblMachine31.setText("30");
       lblMachine31.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
       lblMachine31.setName("lblMachine31"); // NOI18N
-      jPanel1.add(lblMachine31);
+      contentPanel.add(lblMachine31);
 
       lblMachine32.setFont(new java.awt.Font("Tahoma", 1, 40));
       lblMachine32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       lblMachine32.setText("31");
       lblMachine32.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
       lblMachine32.setName("lblMachine32"); // NOI18N
-      jPanel1.add(lblMachine32);
+      contentPanel.add(lblMachine32);
 
       lblMachine33.setFont(new java.awt.Font("Tahoma", 1, 40));
       lblMachine33.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       lblMachine33.setText("32");
       lblMachine33.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
       lblMachine33.setName("lblMachine33"); // NOI18N
-      jPanel1.add(lblMachine33);
+      contentPanel.add(lblMachine33);
 
       lblMachine34.setFont(new java.awt.Font("Tahoma", 1, 40));
       lblMachine34.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       lblMachine34.setText("33");
       lblMachine34.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
       lblMachine34.setName("lblMachine34"); // NOI18N
-      jPanel1.add(lblMachine34);
+      contentPanel.add(lblMachine34);
 
       lblMachine37.setFont(new java.awt.Font("Tahoma", 1, 40));
       lblMachine37.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
       lblMachine37.setText("34");
       lblMachine37.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
       lblMachine37.setName("lblMachine37"); // NOI18N
-      jPanel1.add(lblMachine37);
-
-      lblQueue.setFont(new java.awt.Font("Tahoma", 1, 48));
-      lblQueue.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-      lblQueue.setName("lblQueue"); // NOI18N
+      contentPanel.add(lblMachine37);
 
       javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
       this.setLayout(layout);
       layout.setHorizontalGroup(
          layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+         .addGroup(layout.createSequentialGroup()
             .addContainerGap()
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-               .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
-               .addComponent(lblQueue, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE))
+            .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
             .addContainerGap())
       );
       layout.setVerticalGroup(
          layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
          .addGroup(layout.createSequentialGroup()
             .addContainerGap()
-            .addComponent(lblQueue, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
+            .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
             .addContainerGap())
       );
    }// </editor-fold>//GEN-END:initComponents
    // Variables declaration - do not modify//GEN-BEGIN:variables
-   private javax.swing.JPanel jPanel1;
+   private javax.swing.JPanel contentPanel;
    private javax.swing.JLabel lblMachine10;
    private javax.swing.JLabel lblMachine11;
    private javax.swing.JLabel lblMachine12;
@@ -378,17 +368,6 @@ public class MapPanel316 extends AbstractMapPanel {
    private javax.swing.JLabel lblMachine7;
    private javax.swing.JLabel lblMachine8;
    private javax.swing.JLabel lblMachine9;
-   private javax.swing.JLabel lblQueue;
    private javax.swing.JLabel lblSpacer;
    // End of variables declaration//GEN-END:variables
-
-
-   public JLabel getQueueLabel() {
-      return lblQueue;
-   }
-
-   public JPanel getPanel() {
-      return this;
-   }
-
 }

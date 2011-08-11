@@ -31,7 +31,7 @@ public class TimeoutTask extends TimerTask {
       // remove the tray icon from the system tray
       SystemTray.getSystemTray().remove(systemTrayIcon);
 
-      System.exit(Constants.NO_SERVER_FOUND);
+      System.exit(Constants.EXIT_NO_SERVER_FOUND);
    }
 
 }
