@@ -26,6 +26,7 @@ public class Server {
    public static void main(String[] args) throws IOException {
 
       String compName = System.getenv("COMPUTERNAME");
+//      String compName = "SBEASTCAL1-01";
 
       if(args.length > 0) {
          compName = args[0];

@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 
 /**
  *
- * @author mark
+ * @author Mark
  */
 public class ServerLabelProcessor extends LabelProcessor {
 

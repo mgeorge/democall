@@ -2,7 +2,7 @@ package network;
 
 /**
  *
- * @author mark
+ * @author Mark
  */
 public class MessageGenerator {
 

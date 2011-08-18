@@ -4,7 +4,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author mark
+ * @author Mark
  */
 public class Lab implements Comparable<Lab>{
 

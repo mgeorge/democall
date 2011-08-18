@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package clients;
 
 import constants.Constants;
@@ -201,6 +197,7 @@ public class StudentClient {
    public static void main(String[] args) throws Exception {
 
       String compName = System.getenv("COMPUTERNAME");
+//      String compName = "SBEASTCAL1-31";
 
       if(args.length > 0) {
          compName = args[0];

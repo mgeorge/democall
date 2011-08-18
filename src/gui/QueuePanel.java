@@ -1,20 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * QueuePanel.java
- *
- * Created on 9/08/2011, 7:27:03 PM
- */
 package gui;
 
 import javax.swing.JLabel;
 
 /**
  *
- * @author mark
+ * @author Mark
  */
 public class QueuePanel extends javax.swing.JPanel {
 

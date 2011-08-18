@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author mark
+ * @author Mark, and Christopher Frantz
  */
 public class BroadcastResponder extends Thread {
 
@@ -40,7 +40,7 @@ public class BroadcastResponder extends Thread {
                socket.send(new DatagramPacket(buffer, buffer.length, packet.getAddress(), packet.getPort()));
             }
          }
-         
+
       } catch (Exception ex) {
          Logger.getLogger(BroadcastResponder.class.getName()).log(Level.SEVERE, null, ex);
       }

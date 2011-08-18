@@ -5,6 +5,9 @@ import network.RequestSender;
 
 /**
  *  Simulates everyone hitting the help button at the same time.
+ *
+ *  Tests threading and queue overflow.
+ *
  */
 public class Panic {
 
@@ -16,7 +19,6 @@ public class Panic {
        for (int i = 1; i <= 40; i++) {
          requestSender.sendRequest(generator.requestHelp(String.valueOf(i)));
       }
-
 
    }
 

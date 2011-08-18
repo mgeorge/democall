@@ -13,7 +13,7 @@ import network.RequestSender;
 
 /**
  *
- * @author mark
+ * @author Mark
  */
 public class TutorLabelProcessor extends LabelProcessor {
 
@@ -31,7 +31,7 @@ public class TutorLabelProcessor extends LabelProcessor {
          public void mouseClicked(MouseEvent e) {
             JLabel label = (JLabel) e.getSource();
             String machine = label.getText();
-            
+
             // send cancel request to server
             cancelRequest(machine);
 

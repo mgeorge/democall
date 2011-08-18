@@ -1,20 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * MapPanel.java
- *
- * Created on 2/08/2010, 10:54:22 AM
- */
 package gui.maps;
 
 import javax.swing.JPanel;
 
 /**
  *
- * @author geoma48p
+ * @author Mark
  */
 public class MapPanel303 extends JPanel {
 

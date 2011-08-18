@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author mark
+ * @author Mark
  */
 public class RequestSender {
 
@@ -50,7 +50,7 @@ public class RequestSender {
          return response;
       } catch (Exception ex) {
          Logger.getLogger(RequestSender.class.getName()).log(Level.SEVERE, null, ex);
-      } 
+      }
       return Collections.EMPTY_SET;
    }
 

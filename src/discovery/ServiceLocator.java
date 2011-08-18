@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author mark
+ * @author Mark
  */
 public class ServiceLocator {
 
