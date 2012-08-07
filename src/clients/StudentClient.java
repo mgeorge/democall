@@ -196,8 +196,8 @@ public class StudentClient {
    @SuppressWarnings("ResultOfObjectAllocationIgnored")
    public static void main(String[] args) throws Exception {
 
-      String compName = System.getenv("COMPUTERNAME");
-//      String compName = "SBEASTCAL1-31";
+//      String compName = System.getenv("COMPUTERNAME");
+      String compName = "SBEASTCAL1-30";
 
       if(args.length > 0) {
          compName = args[0];

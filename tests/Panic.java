@@ -2,24 +2,33 @@
 import network.MessageGenerator;
 import network.RequestSender;
 
-
 /**
- *  Simulates everyone hitting the help button at the same time.
+ * Simulates an entire lab requesting help at the same time.
  *
- *  Tests threading and queue overflow.
+ * Tests threading and queue overflow.
  *
  */
 public class Panic {
 
    public static void main(String[] args) {
 
-       RequestSender requestSender = new RequestSender("127.0.0.1");
-       MessageGenerator generator = new MessageGenerator();
+      final RequestSender requestSender = new RequestSender("127.0.0.1");
+      final MessageGenerator generator = new MessageGenerator();
 
-       for (int i = 1; i <= 40; i++) {
-         requestSender.sendRequest(generator.requestHelp(String.valueOf(i)));
+
+      // using 2 to 30 since those are numbers that all lab layouts have
+      for (int i = 2; i <= 30; i++) {
+
+         final int x = i;
+
+         new Thread(new Runnable() {
+
+            public void run() {
+               requestSender.sendRequest(generator.requestHelp(String.valueOf(x)));
+            }
+         }).start();
+
       }
 
    }
-
 }

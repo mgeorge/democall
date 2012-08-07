@@ -28,7 +28,8 @@ public class TutorLabelProcessor extends LabelProcessor {
       return new MouseAdapter() {
 
          @Override
-         public void mouseClicked(MouseEvent e) {
+         public void mousePressed(MouseEvent e) {
+            super.mousePressed(e);
             JLabel label = (JLabel) e.getSource();
             String machine = label.getText();
 
@@ -60,4 +61,12 @@ public class TutorLabelProcessor extends LabelProcessor {
       }
    }
 
+   private void clear() {
+      // copy the queue so we don't get ConcurrentModificationExceptions in this iterator
+      Set<Integer> copy = new LinkedHashSet<Integer>(queue);
+      for (Integer machine : copy) {
+         cancel(machine);
+      }
+   }   
+   
 }

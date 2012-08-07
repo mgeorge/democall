@@ -1,11 +1,7 @@
 package discovery;
 
 import constants.Constants;
-import java.net.DatagramPacket;
-import java.net.Inet4Address;
-import java.net.InetAddress;
-import java.net.MulticastSocket;
-import java.net.NetworkInterface;
+import java.net.*;
 import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;

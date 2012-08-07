@@ -15,11 +15,13 @@ public class ServerLabelProcessor extends LabelProcessor {
       return new MouseAdapter() {
 
          @Override
-         public void mouseClicked(MouseEvent e) {
+         public void mousePressed(MouseEvent e) {
+            super.mousePressed(e);
             JLabel label = (JLabel) e.getSource();
             int id = new Integer(label.getText());
             cancel(id);
          }
+
       };
    }
 }

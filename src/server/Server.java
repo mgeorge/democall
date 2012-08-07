@@ -7,9 +7,9 @@ package server;
 import constants.Constants;
 import discovery.BroadcastResponder;
 import gui.Lab;
-import gui.processors.LabelProcessor;
 import gui.LabRegistry;
 import gui.QueuePanel;
+import gui.processors.LabelProcessor;
 import gui.processors.ServerLabelProcessor;
 import java.awt.BorderLayout;
 import java.io.IOException;
@@ -25,8 +25,8 @@ public class Server {
 
    public static void main(String[] args) throws IOException {
 
-      String compName = System.getenv("COMPUTERNAME");
-//      String compName = "SBEASTCAL1-01";
+//      String compName = System.getenv("COMPUTERNAME");
+      String compName = "SBEASTCAL1-01";
 
       if(args.length > 0) {
          compName = args[0];

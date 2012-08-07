@@ -74,12 +74,13 @@ public class TutorClient {
 
    @SuppressWarnings("ResultOfObjectAllocationIgnored")
    public static void main(String[] args) {
-      String compName = System.getenv("COMPUTERNAME");
+//      String compName = System.getenv("COMPUTERNAME");
+      String compName = "SBEASTCAL1-30";      
 
       if(args.length > 0) {
          compName = args[0];
       }
-      
+
       new TutorClient(compName);
    }
 }

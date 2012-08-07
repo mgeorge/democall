@@ -5,10 +5,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.event.MouseAdapter;
-import java.util.HashMap;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -18,10 +15,11 @@ import javax.swing.JPanel;
  */
 public abstract class LabelProcessor {
 
-   private Color requestCol = Color.GREEN;
-   private Color regularCol = new JLabel().getBackground();
-   private Map<Integer, JLabel> labels = new HashMap<Integer, JLabel>();
-   private final Set<Integer> queue = new LinkedHashSet<Integer>();
+   private final Color requestCol = Color.GREEN;
+   private final Color regularCol = new JLabel().getBackground();
+   private final Map<Integer, JLabel> labels = new HashMap<Integer, JLabel>();
+   protected final Set<Integer> queue = new LinkedHashSet<Integer>();
+//   protected final Collection<Integer> queue = new ConcurrentLinkedQueue();
 
    public abstract MouseAdapter getMouseAdapter();
 
@@ -52,50 +50,50 @@ public abstract class LabelProcessor {
       }
    }
 
-   public synchronized void request(final int id) {
+   public void request(final int id) {
+      synchronized (queue) {
+         queue.add(id);
 
-      queue.add(id);
+         final String queueStr = queue.toString();
 
-      final String queueStr = queue.toString();
+         final JLabel label = labels.get(id);
 
-      final JLabel label = labels.get(id);
+         EventQueue.invokeLater(new Runnable() {
 
-      EventQueue.invokeLater(new Runnable() {
-
-         public void run() {
-            label.setBackground(requestCol);
-            QueuePanel.getQueueLabel().setText(queueStr.substring(1, queueStr.length() - 1));
-         }
-      });
-
+            public void run() {
+               if (label != null) {
+                  label.setBackground(requestCol);
+               }
+               QueuePanel.getQueueLabel().setText(queueStr.substring(1, queueStr.length() - 1));
+            }
+         });
+      }
    }
 
    public synchronized void cancel(int id) {
-      queue.remove(id);
+      synchronized (queue) {
+         queue.remove(id);
 
-      String queueStr = queue.toString();
+         String queueStr = queue.toString();
 
-      QueuePanel.getQueueLabel().setText(queueStr.substring(1, queueStr.length() - 1));
+         QueuePanel.getQueueLabel().setText(queueStr.substring(1, queueStr.length() - 1));
 
-      final JLabel label = labels.get(id);
+         final JLabel label = labels.get(id);
 
-      EventQueue.invokeLater(new Runnable() {
+         EventQueue.invokeLater(new Runnable() {
 
-         public void run() {
-            label.setBackground(regularCol);
-         }
-      });
+            public void run() {
+               if (label != null) {
+                  label.setBackground(regularCol);
+               }
+            }
+         });
+      }
    }
 
-   public Set<Integer> getQueue() {
-      return queue;
-   }
-
-   void clear() {
-      // copy the queue so we don't get ConcurrentModificationExceptions in this iterator
-      Set<Integer> copy = new LinkedHashSet<Integer>(queue);
-      for (Integer machine : copy) {
-         cancel(machine);
+   public Collection<Integer> getQueue() {
+      synchronized (queue) {
+         return queue;
       }
    }
 }
