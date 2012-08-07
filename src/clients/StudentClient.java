@@ -2,12 +2,7 @@ package clients;
 
 import constants.Constants;
 import discovery.ServiceLocator;
-import java.awt.Image;
-import java.awt.MenuItem;
-import java.awt.PopupMenu;
-import java.awt.SystemTray;
-import java.awt.Toolkit;
-import java.awt.TrayIcon;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Timer;
@@ -17,18 +12,26 @@ import network.MessageGenerator;
 import network.RequestSender;
 
 /**
- * The student's client for requesting help.  It adds a system that icon that has a pop-up menu that the student can use to request help or cancel
- * their request.  Requests are automatically canceled when the student clicks the "exit" menu item, or the client is terminated by the OS (via a
- * shutdown hook) meaning there should never be requests in the queue for students who have gone home.
+ * The student's client for requesting help.
+ * 
+ * It adds a system tray icon that has a pop-up menu that the student can use to
+ * request help or cancel their request. Requests are automatically canceled
+ * when the student clicks the "exit" menu item, or the client is terminated by
+ * the OS (via a shutdown hook) meaning there should never be requests in the
+ * queue for students who have gone home.
  *
- * This aims to be both simple and robust, therefor the StudentClient stores no state relating to requests, and uses no persistent connections to the
- * server and receives no information from the server.
+ * This aims to be both simple and robust, therefor the StudentClient stores no
+ * state relating to requests, uses no persistent connections to the server,
+ * and receives no information from the server.
  *
- * The client uses a multi-cast broadcast to discover the IP of the server, which it then uses to sent requests to the server.
+ * The client uses a multi-cast broadcast to discover the IP of the server,
+ * which it then uses to send requests to the server.
  *
- * The wire protocol is very simple.  A string in the form "request 23" is a request for from the machine with ID 23, and "cancel 23" will cancel that
- * request.  Sending multiple "request" commands or multiple "cancel" commands to the server should cause no duplication or problems on the server and
- * are effectively ignored.
+ * The wire protocol is very simple. A string in the form "request 23" is a
+ * request for from the machine with ID 23, and "cancel 23" will cancel that
+ * request. Sending multiple "request" commands or multiple "cancel" commands to
+ * the server should cause no duplication or problems on the server and are
+ * effectively ignored.
  *
  * @author Mark
  */

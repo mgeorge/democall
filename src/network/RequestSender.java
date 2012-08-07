@@ -5,8 +5,8 @@ import java.io.ObjectInputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Collection;
 import java.util.Collections;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 public class RequestSender {
 
    private final String destinationIp;
+   private final MessageGenerator messageGenerator = new MessageGenerator();
 
    public RequestSender(String destinationIp) {
       this.destinationIp = destinationIp;
@@ -27,7 +28,6 @@ public class RequestSender {
          Socket socket = new Socket(destinationIp, Constants.PORT);
          PrintWriter writer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
          writer.println(request);
-         writer.flush();
          writer.close();
          socket.close();
       } catch (Exception ex) {
@@ -36,14 +36,14 @@ public class RequestSender {
    }
 
    @SuppressWarnings({"rawtypes", "unchecked"})
-   public Set<Integer> requestQueue() {
+   public Collection<Integer> requestQueue() {
       try {
          Socket socket = new Socket(destinationIp, Constants.PORT);
          PrintWriter writer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
-         writer.println(new MessageGenerator().requestQueue());
+         writer.println(messageGenerator.requestQueue());
          writer.flush();
          ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-         Set<Integer> response = (Set<Integer>) ois.readObject();
+         Collection<Integer> response = (Collection<Integer>) ois.readObject();
          writer.close();
          ois.close();
          socket.close();

@@ -3,7 +3,6 @@ package gui.processors;
 import gui.QueuePanel;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.EventQueue;
 import java.awt.event.MouseAdapter;
 import java.util.*;
 import javax.swing.JLabel;
@@ -18,8 +17,8 @@ public abstract class LabelProcessor {
    private final Color requestCol = Color.GREEN;
    private final Color regularCol = new JLabel().getBackground();
    private final Map<Integer, JLabel> labels = new HashMap<Integer, JLabel>();
-   protected final Set<Integer> queue = new LinkedHashSet<Integer>();
-//   protected final Collection<Integer> queue = new ConcurrentLinkedQueue();
+//   protected final Collection<Integer> queue = new ConcurrentLinkedQueue<Integer> ();
+   protected final Collection<Integer> queue = new LinkedHashSet<Integer>();
 
    public abstract MouseAdapter getMouseAdapter();
 
@@ -58,15 +57,10 @@ public abstract class LabelProcessor {
 
          final JLabel label = labels.get(id);
 
-         EventQueue.invokeLater(new Runnable() {
-
-            public void run() {
-               if (label != null) {
-                  label.setBackground(requestCol);
-               }
-               QueuePanel.getQueueLabel().setText(queueStr.substring(1, queueStr.length() - 1));
-            }
-         });
+         if (label != null) {
+            label.setBackground(requestCol);
+         }
+         QueuePanel.getQueueLabel().setText(queueStr.substring(1, queueStr.length() - 1));
       }
    }
 
@@ -80,20 +74,16 @@ public abstract class LabelProcessor {
 
          final JLabel label = labels.get(id);
 
-         EventQueue.invokeLater(new Runnable() {
-
-            public void run() {
-               if (label != null) {
-                  label.setBackground(regularCol);
-               }
-            }
-         });
+         if (label != null) {
+            label.setBackground(regularCol);
+         }
       }
    }
 
    public Collection<Integer> getQueue() {
       synchronized (queue) {
-         return queue;
+         // creating a copy of queue to prevent ConcurrentModification errors
+         return new ArrayList(queue);
       }
    }
 }

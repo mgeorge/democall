@@ -1,5 +1,6 @@
 package server;
 
+import constants.Constants;
 import gui.processors.LabelProcessor;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -8,7 +9,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author mark
+ * @author Mark
  */
 public class ApplicationHandler extends Thread {
 
@@ -22,7 +23,7 @@ public class ApplicationHandler extends Thread {
    @Override
    public void run() {
       try {
-         ServerSocket ss = new ServerSocket(7321);
+         ServerSocket ss = new ServerSocket(Constants.PORT);
          while (true) {
             Socket socket = ss.accept();
             new RequestThread(processor, socket).start();

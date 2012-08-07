@@ -3,8 +3,8 @@ package gui.processors;
 import clients.StudentClient;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
@@ -50,23 +50,20 @@ public class TutorLabelProcessor extends LabelProcessor {
       }
    }
 
-   public void update(Set<Integer> queue) {
+   public void update(Collection<Integer> queue) {
       clear();
 
-      // copy the queue so we don't get ConcurrentModificationExceptions in this iterator
-      Set<Integer> copy = new LinkedHashSet<Integer>(queue);
-
-      for (Integer machine : copy) {
+      for (Integer machine : new ArrayList<Integer>(queue)) {
          request(machine);
       }
    }
 
    private void clear() {
-      // copy the queue so we don't get ConcurrentModificationExceptions in this iterator
-      Set<Integer> copy = new LinkedHashSet<Integer>(queue);
-      for (Integer machine : copy) {
+      for (Integer machine : new ArrayList<Integer>(queue)) {
          cancel(machine);
       }
    }   
+   
+ 
    
 }

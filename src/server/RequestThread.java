@@ -29,7 +29,9 @@ public class RequestThread extends Thread {
       try {
          BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
          String message = reader.readLine();
-         processMessage(message);
+         if(message !=null) {  // readLine returns null if buffer is empty
+            processMessage(message);
+         }
          socket.close();
       } catch (IOException ex) {
          Logger.getLogger(RequestThread.class.getName()).log(Level.SEVERE, null, ex);
@@ -55,7 +57,7 @@ public class RequestThread extends Thread {
             Logger.getLogger(RequestThread.class.getName()).log(Level.SEVERE, null, ex);
          } 
       } else {
-         Logger.getLogger(RequestThread.class.getName()).log(Level.SEVERE, "Unknown performative: {0}", performative);
+         Logger.getLogger(RequestThread.class.getName()).log(Level.SEVERE, "Unknown command: {0}", performative);
       }
 
    }

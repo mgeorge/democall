@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package server;
 
 import constants.Constants;
@@ -19,7 +15,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author geoma48p
+ * @author Mark
  */
 public class Server {
 
