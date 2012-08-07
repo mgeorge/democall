@@ -7,7 +7,7 @@ import gui.LabRegistry;
 import gui.QueuePanel;
 import gui.processors.TutorLabelProcessor;
 import java.awt.BorderLayout;
-import java.util.Set;
+import java.util.Collection;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
@@ -19,7 +19,7 @@ import network.RequestSender;
 
 /**
  *
- * @author mark
+ * @author Mark
  */
 public class TutorClient {
 
@@ -47,6 +47,7 @@ public class TutorClient {
          serverIp = new ServiceLocator().locateServer(labName);
          JFrame frame = new JFrame();
          frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+         frame.setAlwaysOnTop( true );
          JPanel mapPanel = lab.getPanel();
          final TutorLabelProcessor processor = new TutorLabelProcessor(serverIp);
          processor.processLabels(mapPanel);
@@ -62,7 +63,7 @@ public class TutorClient {
 
             @Override
             public void run() {
-               Set<Integer> queue = new RequestSender(serverIp).requestQueue();
+               Collection<Integer> queue = new RequestSender(serverIp).requestQueue();
                processor.update(queue);
             }
          }, 0, Constants.TUTOR_CLIENT_POLL);
