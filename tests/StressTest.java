@@ -1,9 +1,12 @@
 
+import java.util.ArrayList;
+import java.util.List;
 import network.MessageGenerator;
 import network.RequestSender;
 
 /**
  * Simulates everyone toggling their help status at the same time.
+ * 
  *
  * Tests concurrency, and ability to handle load.
  *
@@ -15,31 +18,48 @@ public class StressTest {
       final RequestSender requestSender = new RequestSender("127.0.0.1");
       final MessageGenerator generator = new MessageGenerator();
 
-      final int sleepCount = 5;
+      List<Thread> threads = new ArrayList<Thread>();
 
-      // using 2 to 30 since those are numbers that all lab layouts have
-      for (int i = 2; i <= 30; i++) {
+      for (int i = 0; i < 100; i++) {
 
-         final int x = i;
+         // using 2 to 30 since those are numbers that all lab layouts have
+         for (int j = 2; j <= 31; j++) {
 
-         new Thread(new Runnable() {
+            final int x = j;
 
-            public void run() {
-               requestSender.sendRequest(generator.requestHelp(String.valueOf(x)));
-            }
-         }).start();
+            Thread t = new Thread(new Runnable() {
+
+               public void run() {
+                  requestSender.sendRequest(generator.requestHelp(String.valueOf(x)));
+               }
+            });
+
+            t.start();
+            threads.add(t);
+
+         }
+
+         for (Thread thread : threads) {
+            thread.join();
+         }
+
+         // give server a chance to sort things out
+         Thread.sleep(100);
+
+         for (int j = 2; j <= 31; j++) {
+
+            final int x = j;
+
+            new Thread(new Runnable() {
+
+               public void run() {
+                  requestSender.sendRequest(generator.cancelRequest(String.valueOf(x)));
+               }
+            }).start();
+         }
          
-         Thread.sleep(sleepCount);
-
-         new Thread(new Runnable() {
-
-            public void run() {
-               requestSender.sendRequest(generator.cancelRequest(String.valueOf(x)));
-            }
-         }).start();
-
-         Thread.sleep(sleepCount);
+         // give server a chance to sort things out
+         Thread.sleep(100);
       }
-
    }
 }

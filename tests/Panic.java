@@ -17,7 +17,7 @@ public class Panic {
 
 
       // using 2 to 30 since those are numbers that all lab layouts have
-      for (int i = 2; i <= 30; i++) {
+      for (int i = 2; i <= 31; i++) {
 
          final int x = i;
 
