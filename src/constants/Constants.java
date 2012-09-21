@@ -26,5 +26,8 @@ public final class Constants {
 
    // exit code if no map found that matches current COMPUTERNAME env var
    public static final int EXIT_NO_MAP_FOUND = 200;
+   
+   // amount of time the service locator waits for a response from server
+   public static final int SERVICE_LOCATOR_TIMEOUT = 5000; // milliseconds
   
 }

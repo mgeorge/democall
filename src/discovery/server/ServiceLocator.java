@@ -4,6 +4,7 @@ import constants.Constants;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.SocketTimeoutException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,16 +27,23 @@ public class ServiceLocator {
    public String locateServer(final String lab) {
       try {
          final DatagramSocket socket = new DatagramSocket();
+         
+         socket.setSoTimeout(Constants.SERVICE_LOCATOR_TIMEOUT);
+         
          final InetAddress address = InetAddress.getByName(Constants.BROADCAST_ADDRESS);
          final byte[] data = lab.getBytes();
          final int port = Constants.PORT;
+         
          socket.send(new DatagramPacket(data, data.length, address, port));
          final byte[] response = new byte[256];
          final DatagramPacket packet = new DatagramPacket(response, response.length);
+
          socket.receive(packet);
          final String receivedIp = new String(packet.getData()).trim();
          socket.close();
          return receivedIp;
+      } catch(SocketTimeoutException ex) {
+         throw new ServiceNotFoundException();
       } catch (Exception ex) {
          LOG.log(Level.SEVERE, null, ex);
       }

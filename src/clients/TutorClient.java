@@ -5,6 +5,7 @@ import discovery.computername.ComputerNameResolver;
 import discovery.computername.InvalidComputerNameException;
 import discovery.computername.OtagoComputerNameResolver;
 import discovery.server.ServiceLocator;
+import discovery.server.ServiceNotFoundException;
 import gui.Lab;
 import gui.LabRegistry;
 import gui.QueuePanel;
@@ -77,7 +78,9 @@ public class TutorClient {
          }, 0, Constants.TUTOR_CLIENT_POLL);
 
       } catch (InvalidComputerNameException ex) {
-         JOptionPane.showMessageDialog(frame, ex.getMessage(), "Error getting computer name", JOptionPane.ERROR_MESSAGE);
+         JOptionPane.showMessageDialog(frame, ex.getMessage(), "Error getting computer name.", JOptionPane.ERROR_MESSAGE);
+      } catch (ServiceNotFoundException ex) {
+         JOptionPane.showMessageDialog(frame, "Could not connect to server.", "Connection error", JOptionPane.ERROR_MESSAGE);
       } catch (Exception ex) {
          LOG.log(Level.SEVERE, null, ex);
       }

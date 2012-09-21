@@ -5,6 +5,7 @@ import discovery.computername.ComputerNameResolver;
 import discovery.computername.InvalidComputerNameException;
 import discovery.computername.OtagoComputerNameResolver;
 import discovery.server.ServiceLocator;
+import discovery.server.ServiceNotFoundException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,7 +17,7 @@ import network.RequestSender;
 
 /*
  * The student's client for requesting help.
- * 
+ *
  * It adds a system tray icon that has a pop-up menu that the student can use to
  * request help or cancel their request. Requests are automatically canceled
  * when the student clicks the "exit" menu item, or the client is terminated by
@@ -24,8 +25,8 @@ import network.RequestSender;
  * queue for students who have gone home.
  *
  * This aims to be both simple and robust, therefor the StudentClient stores no
- * state relating to requests, uses no persistent connections to the server,
- * and receives no information from the server.
+ * state relating to requests, uses no persistent connections to the server, and
+ * receives no information from the server.
  *
  * The client uses a multi-cast broadcast to discover the IP of the server,
  * which it then uses to send requests to the server.
@@ -39,28 +40,23 @@ import network.RequestSender;
  * @author Mark
  */
 public class StudentClient {
-   
-   private static final Logger LOG = Logger.getLogger(StudentClient.class.getName());   
 
+   private static final Logger LOG = Logger.getLogger(StudentClient.class.getName());
    private final PopupMenu trayPopopMenu = new PopupMenu();
    private final Image trayIconImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icon.png"));
    private final TrayIcon systemTrayIcon = new TrayIcon(trayIconImage, "Demo Call " + Constants.VERSION, trayPopopMenu);
    private final MessageGenerator generator = new MessageGenerator();
-
    private String machineId;
-   private  RequestSender requestSender;
-
+   private RequestSender requestSender;
    private boolean foundServer = false;
-
    private final Thread shutDownHook = new Thread() {
 
       @Override
       public void run() {
          cleanUp();
       }
-
    };
-   
+
    public StudentClient(final ComputerNameResolver nameResolver) {
       try {
          createTrayMenu();
@@ -71,7 +67,7 @@ public class StudentClient {
 
          Runtime.getRuntime().addShutdownHook(this.shutDownHook);
 
-         
+
          try {
             nameResolver.resolve();
          } catch (InvalidComputerNameException ex) {
@@ -87,20 +83,16 @@ public class StudentClient {
          final String lab = nameResolver.getLabName();
          this.machineId = nameResolver.getMachineId();
 
-         // create a timer to cause a timeout if server IP not found within 5 seconds
-         final Timer timer = new Timer();
-         timer.schedule(new TimeoutTask(this.systemTrayIcon), 5000);
 
          // find server IP (uses network multicast)
-         final String serverIp =  new ServiceLocator().locateServer(lab);
-
-         // if we get to this point we got an IP so cancel timer
-         timer.cancel();
+         final String serverIp = new ServiceLocator().locateServer(lab);
 
          this.foundServer = true;
 
          this.requestSender = new RequestSender(serverIp);
 
+      } catch (ServiceNotFoundException ex) {
+         this.systemTrayIcon.displayMessage("Whoops", "Could not connect to server.  Please try again and let the supervisor know if it continues to happen.", TrayIcon.MessageType.ERROR);
       } catch (Exception ex) {
          LOG.log(Level.SEVERE, null, ex);
       }
@@ -119,7 +111,6 @@ public class StudentClient {
             public void actionPerformed(final ActionEvent e) {
                makeRequest();
             }
-
          });
 
          final MenuItem cancel = new MenuItem("Cancel Request");
@@ -128,7 +119,6 @@ public class StudentClient {
             public void actionPerformed(final ActionEvent e) {
                cancelRequest();
             }
-
          });
 
          final MenuItem exit = new MenuItem("Exit");
@@ -137,7 +127,6 @@ public class StudentClient {
             public void actionPerformed(final ActionEvent e) {
                exit();
             }
-
          });
 
          this.trayPopopMenu.add(request);
@@ -192,14 +181,13 @@ public class StudentClient {
    @SuppressWarnings("ResultOfObjectAllocationIgnored")
    public static void main(final String[] args) {
 
-      final String name = "SBEASTCAL1-30";      
+      final String name = "SBEASTCAL1-30";
 
 //      final String name = args.length > 0 ? args[0] : null;
-      
-      
+
+
       final ComputerNameResolver nameResolver = new OtagoComputerNameResolver(name, "COMPUTERNAME");
 
       new StudentClient(nameResolver);
    }
-   
 }
