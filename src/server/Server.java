@@ -1,8 +1,9 @@
 package server;
 
 import constants.Constants;
-import discovery.BroadcastResponder;
-import discovery.ComputerNameResolver;
+import discovery.computername.ComputerNameResolver;
+import discovery.computername.OtagoComputerNameResolver;
+import discovery.server.BroadcastResponder;
 import gui.Lab;
 import gui.LabRegistry;
 import gui.QueuePanel;
@@ -25,7 +26,15 @@ public class Server {
    
    public static void main(String[] args) throws IOException {
 
-      String compName = ComputerNameResolver.getName();
+      final String name = "SBEASTCAL1-01";
+
+//      final String name = args.length > 0 ? args[0] : null;
+
+      final ComputerNameResolver nameResolver = new OtagoComputerNameResolver(name, "COMPUTERNAME");
+
+      nameResolver.resolve();
+
+      final String labName = nameResolver.getLabName();
 
       if(args.length > 0) {
          compName = args[0];

@@ -1,8 +1,10 @@
 package clients;
 
 import constants.Constants;
-import discovery.ComputerNameResolver;
-import discovery.ServiceLocator;
+import discovery.computername.ComputerNameResolver;
+import discovery.computername.InvalidComputerNameException;
+import discovery.computername.OtagoComputerNameResolver;
+import discovery.server.ServiceLocator;
 import gui.Lab;
 import gui.LabRegistry;
 import gui.QueuePanel;
@@ -29,29 +31,32 @@ public class TutorClient {
    private String serverIp;
 
    @SuppressWarnings("rawtypes")
-   public TutorClient(String compName) {
+   public TutorClient(final ComputerNameResolver nameResolver) {
+
+      JFrame frame = null;
 
       try {
-         String[] nameBits = compName.split("-");
-         String labName = nameBits[0];
+         nameResolver.resolve();
 
-         LabRegistry registry = new LabRegistry();
-         Object[] labs = registry.getLabs().toArray();
-         Lab currentLab = registry.getLab(labName);
+         String labName = nameResolver.getLabName();
 
-         Lab lab = (Lab) JOptionPane.showInputDialog(null, "Which lab?", "Which lab?",  JOptionPane.QUESTION_MESSAGE, null, labs, currentLab);
-         if(lab==null) {
-            JOptionPane.showMessageDialog(null, "There is no map for this lab yet.", "No map", JOptionPane.ERROR_MESSAGE);
-            System.exit(Constants.EXIT_NO_MAP_FOUND);
+         final LabRegistry registry = new LabRegistry();
+         final Lab[] labs = registry.getLabs().toArray(new Lab[registry.getLabs().size()]);
+         final Lab currentLab = registry.getLab(labName);
+
+         final Lab lab = (Lab) JOptionPane.showInputDialog(null, "Which lab?", "Which lab?",  JOptionPane.QUESTION_MESSAGE, null, labs, currentLab);
+
+         if (lab == null) {
+            System.exit(0);
          } else {
             labName = lab.getLabName();
          }
 
          serverIp = new ServiceLocator().locateServer(labName);
-         JFrame frame = new JFrame();
+         frame = new JFrame();
          frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-         frame.setAlwaysOnTop( true );
-         JPanel mapPanel = lab.getPanel();
+         frame.setAlwaysOnTop(true);
+         final JPanel mapPanel = lab.getPanel();
          final TutorLabelProcessor processor = new TutorLabelProcessor(serverIp);
          processor.processLabels(mapPanel);
          frame.setTitle(String.format("Democall %1s - Tutor Client (%1s)", Constants.VERSION, lab.getLabDescription()));
@@ -61,30 +66,34 @@ public class TutorClient {
          frame.pack();
          frame.setVisible(true);
 
-         Timer timer = new Timer(true);
+         final Timer timer = new Timer(true);
          timer.scheduleAtFixedRate(new TimerTask() {
 
             @Override
             public void run() {
-               Collection<Integer> queue = new RequestSender(serverIp).requestQueue();
+               final Collection<Integer> queue = new RequestSender(serverIp).requestQueue();
                processor.update(queue);
             }
          }, 0, Constants.TUTOR_CLIENT_POLL);
 
+      } catch (InvalidComputerNameException ex) {
+         JOptionPane.showMessageDialog(frame, ex.getMessage(), "Error getting computer name", JOptionPane.ERROR_MESSAGE);
       } catch (Exception ex) {
          LOG.log(Level.SEVERE, null, ex);
       }
    }
 
    @SuppressWarnings("ResultOfObjectAllocationIgnored")
-   public static void main(String[] args) {
-      String compName = ComputerNameResolver.getName();
+   public static void main(final String[] args) {
 
-      if(args.length > 0) {
-         compName = args[0];
-      }
+      final String name = "SBEASTCAL1-31";
 
-      new TutorClient(compName);
+//      final String name = args.length > 0 ? args[0] : null;
+
+
+      final ComputerNameResolver nameResolver = new OtagoComputerNameResolver(name, "COMPUTERNAME");
+
+      new TutorClient(nameResolver);
    }
 
 }

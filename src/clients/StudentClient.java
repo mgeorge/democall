@@ -1,8 +1,10 @@
 package clients;
 
 import constants.Constants;
-import discovery.ComputerNameResolver;
-import discovery.ServiceLocator;
+import discovery.computername.ComputerNameResolver;
+import discovery.computername.InvalidComputerNameException;
+import discovery.computername.OtagoComputerNameResolver;
+import discovery.server.ServiceLocator;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -45,7 +47,6 @@ public class StudentClient {
    private final TrayIcon systemTrayIcon = new TrayIcon(trayIconImage, "Demo Call " + Constants.VERSION, trayPopopMenu);
    private final MessageGenerator generator = new MessageGenerator();
 
-   private String serverIp;
    private String machineId;
    private  RequestSender requestSender;
 
@@ -60,7 +61,7 @@ public class StudentClient {
 
    };
 
-   public StudentClient(String compName) {
+   public StudentClient(final ComputerNameResolver nameResolver) {
       try {
          createTrayMenu();
 
@@ -69,8 +70,11 @@ public class StudentClient {
 
          Runtime.getRuntime().addShutdownHook(this.shutDownHook);
 
-         if (compName == null) {
-            this.systemTrayIcon.displayMessage("Whoops", "COMPUTERNAME environment variable is not set.", TrayIcon.MessageType.ERROR);
+
+         try {
+            nameResolver.resolve();
+         } catch (InvalidComputerNameException ex) {
+            this.systemTrayIcon.displayMessage("Whoops", ex.getMessage(), TrayIcon.MessageType.ERROR);
 
             // give user a chance to read message
             Thread.sleep(5000);
@@ -79,30 +83,15 @@ public class StudentClient {
             exit();
          }
 
-         // lab machines usually have a COMPUTERNAME in the form "labname-machineId", eg SB316-23
-
-         // process computer name to extract lab and machine ID
-         String[] nameBits = compName.split("-");
-
-         if (nameBits.length < 2) {
-            this.systemTrayIcon.displayMessage("Whoops", "COMPUTERNAME environment variable is not in the expected format.", TrayIcon.MessageType.ERROR);
-
-            // give user a chance to read message
-            Thread.sleep(5000);
-
-            // shutdown
-            exit();
-         }
-
-         String lab = nameBits[0];
-         this.machineId = nameBits[1];
+         final String lab = nameResolver.getLabName();
+         this.machineId = nameResolver.getMachineId();
 
          // create a timer to cause a timeout if server IP not found within 5 seconds
-         Timer timer = new Timer();
+         final Timer timer = new Timer();
          timer.schedule(new TimeoutTask(this.systemTrayIcon), 5000);
 
          // find server IP (uses network multicast)
-         this.serverIp =  new ServiceLocator().locateServer(lab);
+         final String serverIp =  new ServiceLocator().locateServer(lab);
 
          // if we get to this point we got an IP so cancel timer
          timer.cancel();
@@ -200,15 +189,16 @@ public class StudentClient {
    }
 
    @SuppressWarnings("ResultOfObjectAllocationIgnored")
-   public static void main(String[] args) throws Exception {
+   public static void main(final String[] args) {
 
-      String compName = ComputerNameResolver.getName();
+      final String name = "SBEASTCAL1-30";
 
-      if(args.length > 0) {
-         compName = args[0];
-      }
+//      final String name = args.length > 0 ? args[0] : null;
 
-      new StudentClient(compName);
+
+      final ComputerNameResolver nameResolver = new OtagoComputerNameResolver(name, "COMPUTERNAME");
+
+      new StudentClient(nameResolver);
    }
    
 }

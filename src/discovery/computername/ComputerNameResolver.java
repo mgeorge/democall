@@ -1,18 +1,22 @@
-package discovery;
+package discovery.computername;
 
-/**
- *
+/*
  * @author Mark
  */
-public class ComputerNameResolver {
+public interface ComputerNameResolver {
 
-   private ComputerNameResolver() {
-   }
+   String getComputerName();
+
+   String getLabName();
+
+   String getMachineId();
    
-   public static String  getName() {
-//      return System.getenv("COMPUTERNAME");
-//      return "SBEASTCAL1-01";
-      return "SBEASTCAL1-30";
-   }
+   /**
+    * Parses the computer name into it lab and machine ID parts.
+    *
+    * @throws InvalidComputerNameException if the name can not be resolved or
+    * is not in the expected format.
+    */
+   void resolve();
    
 }
