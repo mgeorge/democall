@@ -18,7 +18,7 @@ public final class OtagoComputerNameResolver implements ComputerNameResolver {
     *
     * @param name the computer name to use (or null).
     * @param envVar the environment variable to use if name is not set.
-    *
+    * 
     */
    public OtagoComputerNameResolver(final String name, final String envVar) {
       super();
@@ -35,7 +35,7 @@ public final class OtagoComputerNameResolver implements ComputerNameResolver {
       if(computerName == null) {
          throw new InvalidComputerNameException("The computer name has not been provided via a recognisable method.\nTry setting the COMPUTERNAME environment variable, or passing the name as an argument when starting the application.");
       }
-
+      
       final String[] nameBits = computerName.split("-");
 
       if (nameBits.length < 2) {

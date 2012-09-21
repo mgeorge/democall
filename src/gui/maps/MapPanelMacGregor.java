@@ -10,6 +10,7 @@ public class MapPanelMacGregor extends JPanel {
 
    /** Creates new form MapPanel */
    public MapPanelMacGregor() {
+      super();
       initComponents();
    }
 

@@ -16,14 +16,14 @@ public class StressTest {
    private StressTest() {
    }
    
-   public static void main(String[] args) throws InterruptedException {
+   public static void main(final String[] args) throws InterruptedException {
 
       final RequestSender requestSender = new RequestSender("127.0.0.1");
       final MessageGenerator generator = new MessageGenerator();
 
       List<Thread> threads = new ArrayList<Thread>();
 
-      for (int i = 0; i < 100; i++) {
+      for (int i = 0; i < 50; i++) {
 
          // using 2 to 30 since those are numbers that all lab layouts have
          for (int j = 2; j <= 31; j++) {
@@ -46,8 +46,8 @@ public class StressTest {
             thread.join();
          }
 
-         // give server a chance to sort things out
-         Thread.sleep(100);
+         // give server a chance to sort things out, and so we can visually examine the map
+         Thread.sleep(250);
 
          for (int j = 2; j <= 31; j++) {
 
@@ -61,8 +61,8 @@ public class StressTest {
             }).start();
          }
          
-         // give server a chance to sort things out
-         Thread.sleep(100);
+         // give server a chance to sort things out, and so we can visually examine the map
+         Thread.sleep(250);
       }
    }
 }

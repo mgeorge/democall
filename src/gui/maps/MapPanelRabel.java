@@ -10,6 +10,7 @@ public class MapPanelRabel extends JPanel {
 
    /** Creates new form MapPanel */
    public MapPanelRabel() {
+      super();
       initComponents();
    }
 

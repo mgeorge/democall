@@ -13,7 +13,7 @@ public class Panic {
    private Panic() {
    }   
    
-   public static void main(String[] args) {
+   public static void main(final String[] args) {
 
       final RequestSender requestSender = new RequestSender("127.0.0.1");
       final MessageGenerator generator = new MessageGenerator();

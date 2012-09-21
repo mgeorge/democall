@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 import network.MessageGenerator;
 import network.RequestSender;
 
-/**
+/*
  * The student's client for requesting help.
  * 
  * It adds a system tray icon that has a pop-up menu that the student can use to
@@ -60,17 +60,18 @@ public class StudentClient {
       }
 
    };
-
+   
    public StudentClient(final ComputerNameResolver nameResolver) {
       try {
          createTrayMenu();
 
-         // not sure this is necessary but Windows is currently not exiting when the shutdown hook kicks in...
+         // not sure this is necessary but Windows is currently not exiting
+         // when the shutdown hook kicks in...
          this.shutDownHook.setDaemon(true);
 
          Runtime.getRuntime().addShutdownHook(this.shutDownHook);
 
-
+         
          try {
             nameResolver.resolve();
          } catch (InvalidComputerNameException ex) {
@@ -112,10 +113,10 @@ public class StudentClient {
 
          this.systemTrayIcon.setImageAutoSize(true);
 
-         MenuItem request = new MenuItem("Request Help");
+         final MenuItem request = new MenuItem("Request Help");
          request.addActionListener(new ActionListener() {
 
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                makeRequest();
             }
 
@@ -124,16 +125,16 @@ public class StudentClient {
          final MenuItem cancel = new MenuItem("Cancel Request");
          cancel.addActionListener(new ActionListener() {
 
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                cancelRequest();
             }
 
          });
 
-         MenuItem exit = new MenuItem("Exit");
+         final MenuItem exit = new MenuItem("Exit");
          exit.addActionListener(new ActionListener() {
 
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(final ActionEvent e) {
                exit();
             }
 
@@ -180,7 +181,7 @@ public class StudentClient {
 
    private void cleanUp() {
       // cancel any requests the student has made
-      if(this.foundServer) {
+      if (this.foundServer) {
          cancelRequest();
       }
 
@@ -191,11 +192,11 @@ public class StudentClient {
    @SuppressWarnings("ResultOfObjectAllocationIgnored")
    public static void main(final String[] args) {
 
-      final String name = "SBEASTCAL1-30";
+      final String name = "SBEASTCAL1-30";      
 
 //      final String name = args.length > 0 ? args[0] : null;
-
-
+      
+      
       final ComputerNameResolver nameResolver = new OtagoComputerNameResolver(name, "COMPUTERNAME");
 
       new StudentClient(nameResolver);

@@ -1,6 +1,6 @@
 package server;
 
-import gui.processors.LabelProcessor;
+import gui.processors.AbstractLabelProcessor;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -17,11 +17,12 @@ public class RequestThread extends Thread {
 
    private static final Logger LOG = Logger.getLogger(RequestThread.class.getName());   
    
-   private final LabelProcessor processor;
+   private final AbstractLabelProcessor processor;
    private final Socket socket;
 
-   public RequestThread(LabelProcessor processor, Socket socket) {
-      this.setDaemon(true);
+   public RequestThread(final AbstractLabelProcessor processor, final Socket socket) {
+      super();
+      super.setDaemon(true);
       this.processor = processor;
       this.socket = socket;
    }
@@ -29,9 +30,9 @@ public class RequestThread extends Thread {
    @Override
    public void run() {
       try {
-         BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-         String message = reader.readLine();
-         if(message !=null) {  // readLine returns null if buffer is empty
+         final BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+         final String message = reader.readLine();
+         if (message != null) {  // readLine returns null if buffer is empty
             processMessage(message);
          }
          socket.close();
@@ -40,19 +41,19 @@ public class RequestThread extends Thread {
       }
    }
 
-   public void processMessage(String message) {
-      String[] messageBits = message.split(" ");
+   public void processMessage(final String message) {
+      final String[] messageBits = message.split(" ");
 
-      String performative = messageBits[0];
-      int machineId = Integer.parseInt(messageBits[1]);
+      final String performative = messageBits[0];
+      final int machineId = Integer.parseInt(messageBits[1]);
 
-      if (performative.equals("request")) {
+      if ("request".equals(performative)) {
          processor.request(machineId);
-      } else if (performative.equals("cancel")) {
+      } else if ("cancel".equals(performative)) {
          processor.cancel(machineId);
-      } else if (performative.equals("queue")) {
+      } else if ("queue".equals(performative)) {
          try {
-            ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+            final ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
             oos.writeObject(processor.getQueue());
             oos.close();
          } catch (IOException ex) {

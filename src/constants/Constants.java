@@ -4,7 +4,7 @@ package constants;
  *
  * @author Mark
  */
-public class Constants {
+public final class Constants {
 
    private Constants() {
    }

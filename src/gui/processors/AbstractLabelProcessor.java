@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -12,35 +13,35 @@ import javax.swing.JPanel;
  *
  * @author Mark
  */
-public abstract class LabelProcessor {
+public abstract class AbstractLabelProcessor {
 
    private final Color requestCol = Color.GREEN;
    private final Color regularCol = new JLabel().getBackground();
-   private final Map<Integer, JLabel> labels = new HashMap<Integer, JLabel>();
+   private final Map<Integer, JLabel> labels = new ConcurrentHashMap<Integer, JLabel>();
 //   protected final Collection<Integer> queue = new ConcurrentLinkedQueue<Integer> ();
    protected final Collection<Integer> queue = new LinkedHashSet<Integer>();
 
    public abstract MouseAdapter getMouseAdapter();
 
-   public void processLabels(JPanel panel) {
+   public final void processLabels(final JPanel panel) {
       processPanel(panel);
    }
 
-   private void processPanel(JPanel panel) {
+   private void processPanel(final JPanel panel) {
       for (Component component : panel.getComponents()) {
 
          if (component instanceof JLabel) {
-            JLabel label = (JLabel) component;
+            final JLabel label = (JLabel) component;
             try {
                // component must be opaque so the background color can be set
                label.setOpaque(true);
-               Integer id = new Integer(label.getText());
+               final Integer id = Integer.valueOf(label.getText());
                labels.put(id, label);
 
                label.addMouseListener(this.getMouseAdapter());
 
             } catch (NumberFormatException ignored) {
-               // ignored
+               continue;
             }
          } else if (component instanceof JPanel) {
             // found a panel that might contain buttons so recurse
@@ -49,7 +50,7 @@ public abstract class LabelProcessor {
       }
    }
 
-   public void request(final int id) {
+   public final void request(final int id) {
       synchronized (queue) {
          queue.add(id);
 
@@ -64,11 +65,11 @@ public abstract class LabelProcessor {
       }
    }
 
-   public synchronized void cancel(int id) {
+   public final synchronized void cancel(final int id) {
       synchronized (queue) {
          queue.remove(id);
 
-         String queueStr = queue.toString();
+         final String queueStr = queue.toString();
 
          QueuePanel.getQueueLabel().setText(queueStr.substring(1, queueStr.length() - 1));
 
@@ -80,7 +81,7 @@ public abstract class LabelProcessor {
       }
    }
 
-   public Collection<Integer> getQueue() {
+   public final Collection<Integer> getQueue() {
       synchronized (queue) {
          // Creating a copy of queue to prevent ConcurrentModification errors.
          // This only works because queue is locked by the sync block

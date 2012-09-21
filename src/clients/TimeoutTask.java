@@ -13,7 +13,8 @@ public class TimeoutTask extends TimerTask {
 
    private final TrayIcon systemTrayIcon;
 
-   public TimeoutTask(TrayIcon trayIcon) {
+   public TimeoutTask(final TrayIcon trayIcon) {
+      super();
       this.systemTrayIcon = trayIcon;
    }
 

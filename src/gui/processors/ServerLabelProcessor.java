@@ -8,17 +8,17 @@ import javax.swing.JLabel;
  *
  * @author Mark
  */
-public class ServerLabelProcessor extends LabelProcessor {
+public class ServerLabelProcessor extends AbstractLabelProcessor {
 
    @Override
-   public MouseAdapter getMouseAdapter() {
+   public final MouseAdapter getMouseAdapter() {
       return new MouseAdapter() {
 
          @Override
-         public void mousePressed(MouseEvent e) {
+         public void mousePressed(final MouseEvent e) {
             super.mousePressed(e);
-            JLabel label = (JLabel) e.getSource();
-            int id = new Integer(label.getText());
+            final JLabel label = (JLabel) e.getSource();
+            final int id = Integer.valueOf(label.getText());
             cancel(id);
          }
 

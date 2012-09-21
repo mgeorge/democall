@@ -34,18 +34,18 @@ public class TutorClient {
    public TutorClient(final ComputerNameResolver nameResolver) {
 
       JFrame frame = null;
-
+      
       try {
          nameResolver.resolve();
-
+         
          String labName = nameResolver.getLabName();
 
          final LabRegistry registry = new LabRegistry();
          final Lab[] labs = registry.getLabs().toArray(new Lab[registry.getLabs().size()]);
          final Lab currentLab = registry.getLab(labName);
-
+         
          final Lab lab = (Lab) JOptionPane.showInputDialog(null, "Which lab?", "Which lab?",  JOptionPane.QUESTION_MESSAGE, null, labs, currentLab);
-
+         
          if (lab == null) {
             System.exit(0);
          } else {
@@ -86,11 +86,11 @@ public class TutorClient {
    @SuppressWarnings("ResultOfObjectAllocationIgnored")
    public static void main(final String[] args) {
 
-      final String name = "SBEASTCAL1-31";
+      final String name = "SBEASTCAL1-31";      
 
 //      final String name = args.length > 0 ? args[0] : null;
-
-
+      
+      
       final ComputerNameResolver nameResolver = new OtagoComputerNameResolver(name, "COMPUTERNAME");
 
       new TutorClient(nameResolver);

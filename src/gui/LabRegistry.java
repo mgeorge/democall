@@ -5,9 +5,9 @@ import gui.maps.MapPanelRabel;
 import gui.maps.MapPanel303;
 import gui.maps.MapPanelMacGregor;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeSet;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  *
@@ -15,7 +15,7 @@ import java.util.TreeSet;
  */
 public class LabRegistry {
 
-   private Map<String, Lab> labs = new HashMap<String, Lab>();
+   private final Map<String, Lab> labs = new ConcurrentHashMap<String, Lab>();
 
    public LabRegistry() {
       labs.put("SB303", new Lab("SB303", "Commerce 3.03", new MapPanel303()));
@@ -28,7 +28,7 @@ public class LabRegistry {
       return new TreeSet<Lab>(labs.values());
    }
 
-   public Lab getLab(String lab) {
+   public Lab getLab(final String lab) {
       return labs.get(lab);
    }
 

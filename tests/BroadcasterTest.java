@@ -8,7 +8,7 @@ import discovery.server.ServiceLocator;
  * 
  * @author mark
  */
-public class BroadcasterTest {
+public final class BroadcasterTest {
 
    private BroadcasterTest() {
    }
@@ -20,10 +20,12 @@ public class BroadcasterTest {
       final ComputerNameResolver nameResolver = new OtagoComputerNameResolver(name, "COMPUTERNAME");
       nameResolver.resolve();
       
-      String lab = nameResolver.getLabName();
+      final String lab = nameResolver.getLabName();
 
+      final ServiceLocator locator =  new ServiceLocator();
+      
       for(int i=0; i<500; i++) {
-         final String serverIp =  new ServiceLocator().locateServer(lab);
+         final String serverIp = locator.locateServer(lab);
          System.out.println(i + " " + serverIp);
       }
       

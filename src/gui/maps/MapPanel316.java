@@ -10,6 +10,7 @@ public class MapPanel316 extends JPanel {
 
    /** Creates new form MapPanel */
    public MapPanel316() {
+      super();
       initComponents();
    }
 

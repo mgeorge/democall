@@ -21,14 +21,14 @@ public class RequestSender {
    private final String destinationIp;
    private final MessageGenerator messageGenerator = new MessageGenerator();
 
-   public RequestSender(String destinationIp) {
+   public RequestSender(final String destinationIp) {
       this.destinationIp = destinationIp;
    }
 
-   public void sendRequest(String request) {
+   public void sendRequest(final String request) {
       try {
-         Socket socket = new Socket(destinationIp, Constants.PORT);
-         PrintWriter writer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
+         final Socket socket = new Socket(destinationIp, Constants.PORT);
+         final PrintWriter writer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
          writer.println(request);
          writer.close();
          socket.close();
@@ -40,12 +40,12 @@ public class RequestSender {
    @SuppressWarnings({"rawtypes", "unchecked"})
    public Collection<Integer> requestQueue() {
       try {
-         Socket socket = new Socket(destinationIp, Constants.PORT);
-         PrintWriter writer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
+         final Socket socket = new Socket(destinationIp, Constants.PORT);
+         final PrintWriter writer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
          writer.println(messageGenerator.requestQueue());
          writer.flush();
-         ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-         Collection<Integer> response = (Collection<Integer>) ois.readObject();
+         final ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+         final Collection<Integer> response = (Collection<Integer>) ois.readObject();
          writer.close();
          ois.close();
          socket.close();

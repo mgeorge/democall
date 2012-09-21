@@ -15,36 +15,37 @@ import network.RequestSender;
  *
  * @author Mark
  */
-public class TutorLabelProcessor extends LabelProcessor {
+public class TutorLabelProcessor extends AbstractLabelProcessor {
 
    private static final Logger LOG = Logger.getLogger(StudentClient.class.getName());
    
    private final String ip;
 
-   public TutorLabelProcessor(String ip) {
+   public TutorLabelProcessor(final String ip) {
+      super();
       this.ip = ip;
    }
 
    @Override
-   public MouseAdapter getMouseAdapter() {
+   public final MouseAdapter getMouseAdapter() {
       return new MouseAdapter() {
 
          @Override
-         public void mousePressed(MouseEvent e) {
+         public void mousePressed(final MouseEvent e) {
             super.mousePressed(e);
-            JLabel label = (JLabel) e.getSource();
-            String machine = label.getText();
+            final JLabel label = (JLabel) e.getSource();
+            final String machine = label.getText();
 
             // send cancel request to server
             cancelRequest(machine);
 
             // cancel locally so change happens immediately
-            cancel(new Integer(machine));
+            cancel(Integer.valueOf(machine));
          }
       };
    }
 
-   private void cancelRequest(String machine) {
+   private final void cancelRequest(final String machine) {
       try {
          new RequestSender(ip).sendRequest(new MessageGenerator().cancelRequest(machine));
       } catch (Exception ex) {
@@ -52,16 +53,18 @@ public class TutorLabelProcessor extends LabelProcessor {
       }
    }
 
-   public void update(Collection<Integer> queue) {
+   public final void update(final Collection<Integer> queue) {
       clear();
 
-      for (Integer machine : new ArrayList<Integer>(queue)) {
+      final Collection<Integer> q = new ArrayList<Integer>(queue);
+      for (Integer machine : q) {
          request(machine);
       }
    }
 
-   private void clear() {
-      for (Integer machine : new ArrayList<Integer>(queue)) {
+   private final void clear() {
+      final Collection<Integer> q = new ArrayList<Integer>(queue);
+      for (Integer machine : q) {
          cancel(machine);
       }
    }   

@@ -6,11 +6,11 @@ package network;
  */
 public class MessageGenerator {
 
-   public String requestHelp(String machine) {
+   public String requestHelp(final String machine) {
       return "request " + machine;
    }
 
-   public String cancelRequest(String machine) {
+   public String cancelRequest(final String machine) {
       return "cancel " + machine;
    }
 

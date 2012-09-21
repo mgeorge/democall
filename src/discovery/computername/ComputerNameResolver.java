@@ -14,9 +14,9 @@ public interface ComputerNameResolver {
    /**
     * Parses the computer name into it lab and machine ID parts.
     *
-    * @throws InvalidComputerNameException if the name can not be resolved or
+    * @throws InvalidComputerNameException if the name can not be resolved or 
     * is not in the expected format.
-    */
+    */   
    void resolve();
    
 }

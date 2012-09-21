@@ -1,4 +1,4 @@
-package discovery;
+package discovery.server;
 
 import constants.Constants;
 import java.net.DatagramPacket;
@@ -23,21 +23,21 @@ public class ServiceLocator {
     * @return IP address of server
     * @throws Exception
     */
-   public String locateServer(String lab) {
+   public String locateServer(final String lab) {
       try {
-         DatagramSocket socket = new DatagramSocket();
-         InetAddress address = InetAddress.getByName(Constants.BROADCAST_ADDRESS);
-         byte[] data = lab.getBytes();
-         int port = Constants.PORT;
+         final DatagramSocket socket = new DatagramSocket();
+         final InetAddress address = InetAddress.getByName(Constants.BROADCAST_ADDRESS);
+         final byte[] data = lab.getBytes();
+         final int port = Constants.PORT;
          socket.send(new DatagramPacket(data, data.length, address, port));
-         byte[] response = new byte[256];
-         DatagramPacket packet = new DatagramPacket(response, response.length);
+         final byte[] response = new byte[256];
+         final DatagramPacket packet = new DatagramPacket(response, response.length);
          socket.receive(packet);
-         String receivedIp = new String(packet.getData()).trim();
+         final String receivedIp = new String(packet.getData()).trim();
          socket.close();
          return receivedIp;
       } catch (Exception ex) {
-         Logger.getLogger(ServiceLocator.class.getName()).log(Level.SEVERE, null, ex);
+         LOG.log(Level.SEVERE, null, ex);
       }
       return null;
    }

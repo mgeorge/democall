@@ -6,13 +6,13 @@ import javax.swing.JPanel;
  *
  * @author Mark
  */
-public class Lab implements Comparable<Lab>{
+public class Lab implements Comparable<Lab> {
 
-   private String labName;
-   private String labDescription;
-   private JPanel panel;
+   private final String labName;
+   private final String labDescription;
+   private final JPanel panel;
 
-   public Lab(String labName, String labDescription, JPanel panel) {
+   public Lab(final String labName, final String labDescription, final JPanel panel) {
       this.labName = labName;
       this.labDescription = labDescription;
       this.panel = panel;
@@ -35,8 +35,34 @@ public class Lab implements Comparable<Lab>{
       return labDescription;
    }
 
-   public int compareTo(Lab otherLab) {
+   public int compareTo(final Lab otherLab) {
       return this.getLabDescription().compareTo(otherLab.getLabDescription());
    }
 
+   @Override
+   public boolean equals(Object obj) {
+      if (obj == null) {
+         return false;
+      }
+      if (getClass() != obj.getClass()) {
+         return false;
+      }
+      final Lab other = (Lab) obj;
+      if ((this.labName == null) ? (other.labName != null) : !this.labName.equals(other.labName)) {
+         return false;
+      }
+      if ((this.labDescription == null) ? (other.labDescription != null) : !this.labDescription.equals(other.labDescription)) {
+         return false;
+      }
+      return true;
+   }
+
+   @Override
+   public int hashCode() {
+      int hash = 3;
+      hash = 59 * hash + (this.labName != null ? this.labName.hashCode() : 0);
+      hash = 59 * hash + (this.labDescription != null ? this.labDescription.hashCode() : 0);
+      return hash;
+   }
+   
 }
