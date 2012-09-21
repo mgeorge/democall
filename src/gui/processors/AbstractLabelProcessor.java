@@ -3,6 +3,7 @@ package gui.processors;
 import gui.QueuePanel;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -44,12 +45,21 @@ public abstract class AbstractLabelProcessor {
                continue;
             }
          } else if (component instanceof JPanel) {
-            // found a panel that might contain buttons so recurse
+            // found a panel that might contain labels so recurse
             processPanel((JPanel) component);
          }
       }
    }
 
+   public void resizeFonts(float newFontSize) {
+      // there should always labels in this map so hopefully this next line doesn't cause issues
+      Font newFont = labels.values().iterator().next().getFont().deriveFont(newFontSize);
+      
+      for (JLabel label : labels.values()) {
+         label.setFont(newFont);
+      }
+   }   
+   
    public final void request(final int id) {
       synchronized (queue) {
          queue.add(id);

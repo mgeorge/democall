@@ -9,7 +9,6 @@ import discovery.server.ServiceNotFoundException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Timer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import network.MessageGenerator;
@@ -181,10 +180,9 @@ public class StudentClient {
    @SuppressWarnings("ResultOfObjectAllocationIgnored")
    public static void main(final String[] args) {
 
-      final String name = "SBEASTCAL1-30";
+//      final String name = "SBEASTCAL1-30";
 
-//      final String name = args.length > 0 ? args[0] : null;
-
+      final String name = args.length > 0 ? args[0] : null;
 
       final ComputerNameResolver nameResolver = new OtagoComputerNameResolver(name, "COMPUTERNAME");
 

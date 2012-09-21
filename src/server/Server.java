@@ -10,6 +10,8 @@ import gui.QueuePanel;
 import gui.processors.AbstractLabelProcessor;
 import gui.processors.ServerLabelProcessor;
 import java.awt.BorderLayout;
+import java.awt.Font;
+import java.awt.event.*;
 import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -26,9 +28,9 @@ public final class Server {
    
    public static void main(final String[] args) throws IOException {
 
-      final String name = "SBEASTCAL1-01";          
+//      final String name = "SBEASTCAL1-01";          
       
-//      final String name = args.length > 0 ? args[0] : null;
+      final String name = args.length > 0 ? args[0] : null;
       
       final ComputerNameResolver nameResolver = new OtagoComputerNameResolver(name, "COMPUTERNAME");
       
@@ -58,6 +60,24 @@ public final class Server {
       frame.add(BorderLayout.CENTER, mapPanel);
       frame.pack();
       frame.setVisible(true);
+
+      
+      // dynamic font resize based on window size
+      
+      final int defaultSize = Constants.DEFAULT_MAP_FONT_SIZE;
+      final int defaultWidth = mapPanel.getWidth();
+      
+      frame.addComponentListener(new ComponentAdapter() {
+         
+         public void componentResized(ComponentEvent e) {
+            int newWidth = mapPanel.getWidth();
+            float scaleFactor = (float)newWidth / (float)defaultWidth;
+            int newFontSize = Math.round(defaultSize * scaleFactor);
+            processor.resizeFonts(newFontSize);
+         }
+
+      });
+      
 
       new ApplicationHandler(processor).start();
       new BroadcastResponder(labName).start();

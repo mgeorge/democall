@@ -11,6 +11,8 @@ import gui.LabRegistry;
 import gui.QueuePanel;
 import gui.processors.TutorLabelProcessor;
 import java.awt.BorderLayout;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.Collection;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -76,6 +78,23 @@ public class TutorClient {
                processor.update(queue);
             }
          }, 0, Constants.TUTOR_CLIENT_POLL);
+         
+      // dynamic font resize based on window size
+      
+      final int defaultSize = Constants.DEFAULT_MAP_FONT_SIZE;
+      final int defaultWidth = mapPanel.getWidth();
+      
+      frame.addComponentListener(new ComponentAdapter() {
+         
+         public void componentResized(ComponentEvent e) {
+            int newWidth = mapPanel.getWidth();
+            float scaleFactor = (float)newWidth / (float)defaultWidth;
+            int newFontSize = Math.round(defaultSize * scaleFactor);
+            processor.resizeFonts(newFontSize);
+         }
+
+      });         
+         
 
       } catch (InvalidComputerNameException ex) {
          JOptionPane.showMessageDialog(frame, ex.getMessage(), "Error getting computer name.", JOptionPane.ERROR_MESSAGE);
@@ -89,10 +108,9 @@ public class TutorClient {
    @SuppressWarnings("ResultOfObjectAllocationIgnored")
    public static void main(final String[] args) {
 
-      final String name = "SBEASTCAL1-31";      
+//      final String name = "SBEASTCAL1-31";      
 
-//      final String name = args.length > 0 ? args[0] : null;
-      
+      final String name = args.length > 0 ? args[0] : null;
       
       final ComputerNameResolver nameResolver = new OtagoComputerNameResolver(name, "COMPUTERNAME");
 

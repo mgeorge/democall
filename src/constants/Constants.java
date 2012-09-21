@@ -10,7 +10,7 @@ public final class Constants {
    }
    
    // version number for system
-   public static final String VERSION = "3.2.0";
+   public static final String VERSION = "3.3.0";
 
    // randomly chosen multi-cast group
    public static final String BROADCAST_ADDRESS = "233.7.2.9";
@@ -29,5 +29,8 @@ public final class Constants {
    
    // amount of time the service locator waits for a response from server
    public static final int SERVICE_LOCATOR_TIMEOUT = 5000; // milliseconds
-  
+
+   // default size of the label fonts on the maps
+   public static final int DEFAULT_MAP_FONT_SIZE = 40;
+   
 }
