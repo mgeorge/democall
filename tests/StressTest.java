@@ -13,6 +13,9 @@ import network.RequestSender;
  */
 public class StressTest {
 
+   private StressTest() {
+   }
+   
    public static void main(String[] args) throws InterruptedException {
 
       final RequestSender requestSender = new RequestSender("127.0.0.1");

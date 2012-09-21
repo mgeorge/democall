@@ -10,6 +10,9 @@ import network.RequestSender;
  */
 public class Calm {
 
+   private Calm() {
+   }   
+   
    public static void main(String[] args) {
 
       final RequestSender requestSender = new RequestSender("127.0.0.1");
@@ -31,4 +34,5 @@ public class Calm {
       }
 
    }
+
 }

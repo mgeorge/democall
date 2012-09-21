@@ -82,8 +82,9 @@ public abstract class LabelProcessor {
 
    public Collection<Integer> getQueue() {
       synchronized (queue) {
-         // creating a copy of queue to prevent ConcurrentModification errors
-         return new ArrayList(queue);
+         // Creating a copy of queue to prevent ConcurrentModification errors.
+         // This only works because queue is locked by the sync block
+         return new ArrayList<Integer>(queue);
       }
    }
 }

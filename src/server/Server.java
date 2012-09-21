@@ -2,6 +2,7 @@ package server;
 
 import constants.Constants;
 import discovery.BroadcastResponder;
+import discovery.ComputerNameResolver;
 import gui.Lab;
 import gui.LabRegistry;
 import gui.QueuePanel;
@@ -19,10 +20,12 @@ import javax.swing.JPanel;
  */
 public class Server {
 
+   private Server() {
+   }   
+   
    public static void main(String[] args) throws IOException {
 
-//      String compName = System.getenv("COMPUTERNAME");
-      String compName = "SBEASTCAL1-01";
+      String compName = ComputerNameResolver.getName();
 
       if(args.length > 0) {
          compName = args[0];
@@ -57,4 +60,5 @@ public class Server {
       new ApplicationHandler(processor).start();
       new BroadcastResponder(labName).start();
    }
+
 }

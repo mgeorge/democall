@@ -16,6 +16,8 @@ import java.util.logging.Logger;
  */
 public class RequestSender {
 
+   private static final Logger LOG = Logger.getLogger(RequestSender.class.getName());   
+   
    private final String destinationIp;
    private final MessageGenerator messageGenerator = new MessageGenerator();
 
@@ -31,7 +33,7 @@ public class RequestSender {
          writer.close();
          socket.close();
       } catch (Exception ex) {
-         Logger.getLogger(RequestSender.class.getName()).log(Level.SEVERE, null, ex);
+         LOG.log(Level.SEVERE, null, ex);
       }
    }
 
@@ -49,7 +51,7 @@ public class RequestSender {
          socket.close();
          return response;
       } catch (Exception ex) {
-         Logger.getLogger(RequestSender.class.getName()).log(Level.SEVERE, null, ex);
+         LOG.log(Level.SEVERE, null, ex);
       }
       return Collections.EMPTY_SET;
    }

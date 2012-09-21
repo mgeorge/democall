@@ -1,6 +1,7 @@
 package clients;
 
 import constants.Constants;
+import discovery.ComputerNameResolver;
 import discovery.ServiceLocator;
 import gui.Lab;
 import gui.LabRegistry;
@@ -23,6 +24,8 @@ import network.RequestSender;
  */
 public class TutorClient {
 
+   private static final Logger LOG = Logger.getLogger(TutorClient.class.getName());
+   
    private String serverIp;
 
    @SuppressWarnings("rawtypes")
@@ -69,14 +72,13 @@ public class TutorClient {
          }, 0, Constants.TUTOR_CLIENT_POLL);
 
       } catch (Exception ex) {
-         Logger.getLogger(TutorClient.class.getName()).log(Level.SEVERE, null, ex);
+         LOG.log(Level.SEVERE, null, ex);
       }
    }
 
    @SuppressWarnings("ResultOfObjectAllocationIgnored")
    public static void main(String[] args) {
-//      String compName = System.getenv("COMPUTERNAME");
-      String compName = "SBEASTCAL1-30";      
+      String compName = ComputerNameResolver.getName();
 
       if(args.length > 0) {
          compName = args[0];
@@ -84,4 +86,5 @@ public class TutorClient {
 
       new TutorClient(compName);
    }
+
 }

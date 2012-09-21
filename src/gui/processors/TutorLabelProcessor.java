@@ -17,6 +17,8 @@ import network.RequestSender;
  */
 public class TutorLabelProcessor extends LabelProcessor {
 
+   private static final Logger LOG = Logger.getLogger(StudentClient.class.getName());
+   
    private final String ip;
 
    public TutorLabelProcessor(String ip) {
@@ -46,7 +48,7 @@ public class TutorLabelProcessor extends LabelProcessor {
       try {
          new RequestSender(ip).sendRequest(new MessageGenerator().cancelRequest(machine));
       } catch (Exception ex) {
-         Logger.getLogger(StudentClient.class.getName()).log(Level.SEVERE, "Error cancelling request", ex);
+         LOG.log(Level.SEVERE, "Error cancelling request", ex);
       }
    }
 
@@ -63,7 +65,5 @@ public class TutorLabelProcessor extends LabelProcessor {
          cancel(machine);
       }
    }   
-   
- 
    
 }

@@ -13,6 +13,8 @@ import java.util.logging.Logger;
  */
 public class ServiceLocator {
 
+   private static final Logger LOG = Logger.getLogger(ServiceLocator.class.getName());   
+   
    /**
     * Send a multi-cast request for any democall servers.  Server should respond
     * with its IP address.
@@ -39,8 +41,5 @@ public class ServiceLocator {
       }
       return null;
    }
-
-
-
 
 }

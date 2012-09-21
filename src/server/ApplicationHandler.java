@@ -15,6 +15,8 @@ public class ApplicationHandler extends Thread {
 
    private final LabelProcessor processor;
 
+   private static final Logger LOG = Logger.getLogger(ApplicationHandler.class.getName());
+
    public ApplicationHandler(LabelProcessor processor) {
       this.setDaemon(true);
       this.processor = processor;
@@ -29,7 +31,7 @@ public class ApplicationHandler extends Thread {
             new RequestThread(processor, socket).start();
          }
       } catch (Exception ex) {
-         Logger.getLogger(ApplicationHandler.class.getName()).log(Level.SEVERE, null, ex);
+         LOG.log(Level.SEVERE, null, ex);
       }
    }
 }

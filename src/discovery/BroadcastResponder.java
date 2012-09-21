@@ -12,6 +12,8 @@ import java.util.logging.Logger;
  */
 public class BroadcastResponder extends Thread {
 
+   private static final Logger LOG = Logger.getLogger(BroadcastResponder.class.getName());
+
    private String lab;
 
    public BroadcastResponder(String lab) {
@@ -38,7 +40,7 @@ public class BroadcastResponder extends Thread {
          }
 
       } catch (Exception ex) {
-         Logger.getLogger(BroadcastResponder.class.getName()).log(Level.SEVERE, null, ex);
+         LOG.log(Level.SEVERE, null, ex);
       }
 
    }
@@ -65,7 +67,7 @@ public class BroadcastResponder extends Thread {
             }
          }
       } catch (Exception ex) {
-         Logger.getLogger(BroadcastResponder.class.getName()).log(Level.SEVERE, null, ex);
+         LOG.log(Level.SEVERE, null, ex);
       }
       return null;
    }

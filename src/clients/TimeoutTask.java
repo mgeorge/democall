@@ -7,7 +7,7 @@ import java.util.TimerTask;
 
 /**
  *
- * @author mark
+ * @author Mark
  */
 public class TimeoutTask extends TimerTask {
 

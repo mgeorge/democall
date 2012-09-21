@@ -1,6 +1,7 @@
 package clients;
 
 import constants.Constants;
+import discovery.ComputerNameResolver;
 import discovery.ServiceLocator;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -36,6 +37,8 @@ import network.RequestSender;
  * @author Mark
  */
 public class StudentClient {
+   
+   private static final Logger LOG = Logger.getLogger(StudentClient.class.getName());   
 
    private final PopupMenu trayPopopMenu = new PopupMenu();
    private final Image trayIconImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/icon.png"));
@@ -109,7 +112,7 @@ public class StudentClient {
          this.requestSender = new RequestSender(serverIp);
 
       } catch (Exception ex) {
-         Logger.getLogger(StudentClient.class.getName()).log(Level.SEVERE, null, ex);
+         LOG.log(Level.SEVERE, null, ex);
       }
 
 
@@ -155,7 +158,7 @@ public class StudentClient {
          SystemTray.getSystemTray().add(this.systemTrayIcon);
 
       } catch (Exception ex) {
-         Logger.getLogger(StudentClient.class.getName()).log(Level.SEVERE, null, ex);
+         LOG.log(Level.SEVERE, null, ex);
       }
    }
 
@@ -165,7 +168,7 @@ public class StudentClient {
          systemTrayIcon.displayMessage("Help is on the way", "Your request is now in the queue.", TrayIcon.MessageType.INFO);
       } catch (Exception ex) {
          systemTrayIcon.displayMessage("Whoops", "Failed to make request", TrayIcon.MessageType.ERROR);
-         Logger.getLogger(StudentClient.class.getName()).log(Level.SEVERE, "Error making request", ex);
+         LOG.log(Level.SEVERE, "Error making request", ex);
       }
    }
 
@@ -175,7 +178,7 @@ public class StudentClient {
          systemTrayIcon.displayMessage("Request removed", "Your request has been removed from the queue.", TrayIcon.MessageType.INFO);
       } catch (Exception ex) {
          systemTrayIcon.displayMessage("Whoops", "Failed to cancel request", TrayIcon.MessageType.ERROR);
-         Logger.getLogger(StudentClient.class.getName()).log(Level.SEVERE, "Error cancelling request", ex);
+         LOG.log(Level.SEVERE, "Error cancelling request", ex);
       }
    }
 
@@ -199,8 +202,7 @@ public class StudentClient {
    @SuppressWarnings("ResultOfObjectAllocationIgnored")
    public static void main(String[] args) throws Exception {
 
-//      String compName = System.getenv("COMPUTERNAME");
-      String compName = "SBEASTCAL1-30";
+      String compName = ComputerNameResolver.getName();
 
       if(args.length > 0) {
          compName = args[0];
@@ -208,4 +210,5 @@ public class StudentClient {
 
       new StudentClient(compName);
    }
+   
 }

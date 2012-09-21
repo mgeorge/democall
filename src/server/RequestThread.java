@@ -11,10 +11,12 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author geoma48p
+ * @author Mark
  */
 public class RequestThread extends Thread {
 
+   private static final Logger LOG = Logger.getLogger(RequestThread.class.getName());   
+   
    private final LabelProcessor processor;
    private final Socket socket;
 
@@ -34,7 +36,7 @@ public class RequestThread extends Thread {
          }
          socket.close();
       } catch (IOException ex) {
-         Logger.getLogger(RequestThread.class.getName()).log(Level.SEVERE, null, ex);
+         LOG.log(Level.SEVERE, null, ex);
       }
    }
 
@@ -54,11 +56,12 @@ public class RequestThread extends Thread {
             oos.writeObject(processor.getQueue());
             oos.close();
          } catch (IOException ex) {
-            Logger.getLogger(RequestThread.class.getName()).log(Level.SEVERE, null, ex);
+            LOG.log(Level.SEVERE, null, ex);
          } 
       } else {
-         Logger.getLogger(RequestThread.class.getName()).log(Level.SEVERE, "Unknown command: {0}", performative);
+         LOG.log(Level.SEVERE, "Unknown command: {0}", performative);
       }
 
    }
+
 }
