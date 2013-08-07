@@ -10,7 +10,7 @@ public final class Constants {
    }
    
    // version number for system
-   public static final String VERSION = "3.3.0";
+   public static final String VERSION = "3.4";
 
    // randomly chosen multi-cast group
    public static final String BROADCAST_ADDRESS = "233.7.2.9";

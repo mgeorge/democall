@@ -29,6 +29,9 @@ public final class Server {
    public static void main(final String[] args) throws IOException {
 
 //      final String name = "SBEASTCAL1-01";          
+//            final String name = "SB318-1";          
+//            final String name = "SB328-1";          
+
       
       final String name = args.length > 0 ? args[0] : null;
       
@@ -46,7 +49,7 @@ public final class Server {
       final Lab lab = registry.getLab(labName);
 
       if (lab == null) {
-          JOptionPane.showMessageDialog(frame, "There is no map for this lab yet.", "No map", JOptionPane.ERROR_MESSAGE);
+          JOptionPane.showMessageDialog(frame, "There is no map for this lab yet.\nThe lab ID is : " + labName, "No map", JOptionPane.ERROR_MESSAGE);
           System.exit(Constants.EXIT_NO_MAP_FOUND);
       }
 
