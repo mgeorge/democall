@@ -58,6 +58,8 @@ public abstract class AbstractLabelProcessor {
       for (JLabel label : labels.values()) {
          label.setFont(newFont);
       }
+      
+      QueuePanel.getQueueLabel().setFont(newFont);
    }   
    
    public final void request(final int id) {

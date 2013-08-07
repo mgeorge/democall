@@ -12,9 +12,11 @@ import gui.processors.ServerLabelProcessor;
 import java.awt.BorderLayout;
 import java.awt.event.*;
 import java.io.IOException;
+import javax.swing.GroupLayout;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.LayoutStyle;
 
 /**
  *
@@ -28,11 +30,11 @@ public final class Server {
    public static void main(final String[] args) throws IOException {
 
 //      final String name = "SBEASTCAL1-01";          
-            final String name = "SB317-1";          
-//            final String name = "SB318-1";          
+//      final String name = "SB317-1";          
+//      final String name = "SB318-1";          
 
       
-//      final String name = args.length > 0 ? args[0] : null;
+      final String name = args.length > 0 ? args[0] : null;
       
       final ComputerNameResolver nameResolver = new OtagoComputerNameResolver(name, "COMPUTERNAME");
       
@@ -58,11 +60,26 @@ public final class Server {
       processor.processLabels(mapPanel);
 
       frame.setTitle(String.format("Democall %1s - Server (%1s)", Constants.VERSION, lab.getLabDescription()));
-      frame.add(BorderLayout.NORTH, new QueuePanel());
-      frame.add(BorderLayout.CENTER, mapPanel);
+      
+      QueuePanel queuePanel = new QueuePanel();
+      
+      javax.swing.GroupLayout layout = new javax.swing.GroupLayout(frame.getContentPane());
+      frame.getContentPane().setLayout(layout);
+      
+      layout.setHorizontalGroup(
+         layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+         .addComponent(queuePanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+         .addComponent(mapPanel, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+      
+      layout.setVerticalGroup(
+         layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+         .addGroup(layout.createSequentialGroup()
+         .addComponent(queuePanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+         .addComponent(mapPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));    
+      
       frame.pack();
       frame.setVisible(true);
-
       
       // dynamic font resize based on window size
       
