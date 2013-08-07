@@ -18,9 +18,9 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="leftPanel" pref="181" max="32767" attributes="0"/>
+              <Component id="leftPanel" pref="184" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-              <Component id="rightPanel" pref="224" max="32767" attributes="0"/>
+              <Component id="rightPanel" pref="238" max="32767" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -30,7 +30,7 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="leftPanel" alignment="0" max="32767" attributes="2"/>
+                  <Component id="leftPanel" alignment="0" pref="182" max="32767" attributes="2"/>
                   <Component id="rightPanel" alignment="1" max="32767" attributes="2"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>

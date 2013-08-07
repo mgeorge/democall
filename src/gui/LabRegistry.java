@@ -3,6 +3,7 @@ package gui;
 import gui.maps.MapPanel316;
 import gui.maps.MapPanelRabel;
 import gui.maps.MapPanel303;
+import gui.maps.MapPanel317;
 import gui.maps.MapPanel318;
 import gui.maps.MapPanelMacGregor;
 import java.util.Collection;
@@ -24,6 +25,7 @@ public class LabRegistry {
       labs.put("SBEASTCAL1", new Lab("SBEASTCAL1", "MacGregor", new MapPanelMacGregor()));
       labs.put("SBEASTCAL2", new Lab("SBEASTCAL2", "Rabel", new MapPanelRabel()));
       labs.put("SB318", new Lab("SB318", "Commerce 3.18", new MapPanel318()));
+      labs.put("SB317", new Lab("SB317", "Commerce 3.17", new MapPanel317()));      
    }
 
    public Collection<Lab> getLabs() {
