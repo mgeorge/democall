@@ -18,4 +18,8 @@ public class MessageGenerator {
       return "queue 0";
    }
 
+   public String registerTutorClient() {
+      return "register 0";
+   }   
+   
 }

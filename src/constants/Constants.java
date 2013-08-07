@@ -1,5 +1,9 @@
 package constants;
 
+import java.io.ObjectOutputStream;
+import java.util.Collection;
+import java.util.HashSet;
+
 /**
  *
  * @author Mark
@@ -32,5 +36,9 @@ public final class Constants {
 
    // default size of the label fonts on the maps
    public static final int DEFAULT_MAP_FONT_SIZE = 40;
+   
+   // collection for holding persistent sockets for tutor clients
+   // TODO: Refactor this collection somewhere else
+   public static Collection<ObjectOutputStream> PERSISTENT_SOCKETS = new HashSet<ObjectOutputStream>();
    
 }

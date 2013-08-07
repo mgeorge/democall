@@ -29,12 +29,14 @@ public final class Server {
    
    public static void main(final String[] args) throws IOException {
 
+         System.out.println("Server");
+      
 //      final String name = "SBEASTCAL1-01";          
 //      final String name = "SB317-1";          
-//      final String name = "SB318-1";          
+      final String name = "SB318-1";          
 
       
-      final String name = args.length > 0 ? args[0] : null;
+//      final String name = args.length > 0 ? args[0] : null;
       
       final ComputerNameResolver nameResolver = new OtagoComputerNameResolver(name, "COMPUTERNAME");
       
@@ -88,6 +90,7 @@ public final class Server {
       
       frame.addComponentListener(new ComponentAdapter() {
          
+         @Override
          public void componentResized(ComponentEvent e) {
             int newWidth = mapPanel.getWidth();
             float scaleFactor = (float)newWidth / (float)defaultWidth;

@@ -1,5 +1,6 @@
 package server;
 
+import constants.Constants;
 import gui.processors.AbstractLabelProcessor;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,6 +20,7 @@ public class RequestThread extends Thread {
    
    private final AbstractLabelProcessor processor;
    private final Socket socket;
+   private boolean dontClose = false;
 
    public RequestThread(final AbstractLabelProcessor processor, final Socket socket) {
       super();
@@ -35,7 +37,9 @@ public class RequestThread extends Thread {
          if (message != null) {  // readLine returns null if buffer is empty
             processMessage(message);
          }
-         socket.close();
+         if(!dontClose) {
+            socket.close();
+         }
       } catch (IOException ex) {
          LOG.log(Level.SEVERE, null, ex);
       }
@@ -56,6 +60,16 @@ public class RequestThread extends Thread {
             final ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
             oos.writeObject(processor.getQueue());
             oos.close();
+         } catch (IOException ex) {
+            LOG.log(Level.SEVERE, null, ex);
+         } 
+      } else if ("register".equals(performative)) {
+         try {
+            final ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+            oos.writeObject(processor.getQueue());
+            oos.flush();
+            Constants.PERSISTENT_SOCKETS.add(oos);
+            dontClose = true;
          } catch (IOException ex) {
             LOG.log(Level.SEVERE, null, ex);
          } 

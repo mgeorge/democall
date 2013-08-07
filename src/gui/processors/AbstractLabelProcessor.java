@@ -1,10 +1,13 @@
 package gui.processors;
 
+import constants.Constants;
 import gui.QueuePanel;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import javax.swing.JLabel;
@@ -74,7 +77,9 @@ public abstract class AbstractLabelProcessor {
             label.setBackground(requestCol);
          }
          QueuePanel.getQueueLabel().setText(queueStr.substring(1, queueStr.length() - 1));
+         
       }
+         updateTutorClients(queue);
    }
 
    public final synchronized void cancel(final int id) {
@@ -91,6 +96,7 @@ public abstract class AbstractLabelProcessor {
             label.setBackground(regularCol);
          }
       }
+         updateTutorClients(queue);         
    }
 
    public final Collection<Integer> getQueue() {
@@ -98,6 +104,21 @@ public abstract class AbstractLabelProcessor {
          // Creating a copy of queue to prevent ConcurrentModification errors.
          // This only works because queue is locked by the sync block
          return new ArrayList<Integer>(queue);
+      }
+   }
+
+   private void updateTutorClients(Collection<Integer> queue1) {
+      Iterator<ObjectOutputStream> it = Constants.PERSISTENT_SOCKETS.iterator();
+      while (it.hasNext()) {
+         try {
+            ObjectOutputStream oos = it.next();
+            oos.reset(); // necessary since if you send the same object twice some "optimisations" happen causing the client to see cached versions of the object
+            oos.writeObject(queue);
+            oos.flush();
+            System.out.println(queue);
+         } catch (IOException ex) {
+            it.remove();
+         }
       }
    }
 }

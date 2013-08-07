@@ -13,9 +13,8 @@ import gui.processors.TutorLabelProcessor;
 import java.awt.BorderLayout;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.io.ObjectInputStream;
 import java.util.Collection;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -69,15 +68,35 @@ public class TutorClient {
          frame.pack();
          frame.setVisible(true);
 
-         final Timer timer = new Timer(true);
-         timer.scheduleAtFixedRate(new TimerTask() {
+//         final Timer timer = new Timer(true);
+//         timer.scheduleAtFixedRate(new TimerTask() {
+//
+//            @Override
+//            public void run() {
+//               final Collection<Integer> queue = new RequestSender(serverIp).requestQueue();
+//               processor.update(queue);
+//            }
+//         }, 0, Constants.TUTOR_CLIENT_POLL);
+         
+         final ObjectInputStream ois = new RequestSender(serverIp).registerTutorClient();
+         
+         new Thread(new Runnable(){
 
-            @Override
             public void run() {
-               final Collection<Integer> queue = new RequestSender(serverIp).requestQueue();
-               processor.update(queue);
+               while(true) {
+                  try {
+                     @SuppressWarnings("unchecked")
+                     Collection<Integer> queue = (Collection<Integer>)ois.readObject();
+                     System.out.println(queue);
+                     processor.update(queue);
+                  } catch (Exception ex) {
+                     Logger.getLogger(TutorClient.class.getName()).log(Level.SEVERE, null, ex);
+                     break;
+                  }
+               }
             }
-         }, 0, Constants.TUTOR_CLIENT_POLL);
+         }).start();
+         
          
       // dynamic font resize based on window size
       
@@ -86,6 +105,7 @@ public class TutorClient {
       
       frame.addComponentListener(new ComponentAdapter() {
          
+         @Override
          public void componentResized(ComponentEvent e) {
             int newWidth = mapPanel.getWidth();
             float scaleFactor = (float)newWidth / (float)defaultWidth;
@@ -108,9 +128,12 @@ public class TutorClient {
    @SuppressWarnings("ResultOfObjectAllocationIgnored")
    public static void main(final String[] args) {
 
+      System.out.println("Tutor Client");
+      
 //      final String name = "SBEASTCAL1-31";      
+      final String name = "SB318-10";
 
-      final String name = args.length > 0 ? args[0] : null;
+//      final String name = args.length > 0 ? args[0] : null;
       
       final ComputerNameResolver nameResolver = new OtagoComputerNameResolver(name, "COMPUTERNAME");
 

@@ -56,4 +56,19 @@ public class RequestSender {
       return Collections.EMPTY_SET;
    }
 
+   @SuppressWarnings({"rawtypes", "unchecked"})
+   public ObjectInputStream registerTutorClient() {
+      try {
+         final Socket socket = new Socket(destinationIp, Constants.PORT);
+         final PrintWriter writer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
+         writer.println(messageGenerator.registerTutorClient());
+         writer.flush();
+         final ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+         return ois;
+      } catch (Exception ex) {
+         LOG.log(Level.SEVERE, null, ex);
+      }
+      return null;
+   }   
+   
 }
