@@ -46,6 +46,9 @@ public class RequestThread extends Thread {
    }
 
    public void processMessage(final String message) {
+      
+//      System.out.println(message);
+      
       final String[] messageBits = message.split(" ");
 
       final String performative = messageBits[0];

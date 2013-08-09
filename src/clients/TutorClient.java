@@ -87,7 +87,7 @@ public class TutorClient {
                   try {
                      @SuppressWarnings("unchecked")
                      Collection<Integer> queue = (Collection<Integer>)ois.readObject();
-                     System.out.println(queue);
+//                     System.out.println(queue);
                      processor.update(queue);
                   } catch (Exception ex) {
                      Logger.getLogger(TutorClient.class.getName()).log(Level.SEVERE, null, ex);
@@ -128,12 +128,12 @@ public class TutorClient {
    @SuppressWarnings("ResultOfObjectAllocationIgnored")
    public static void main(final String[] args) {
 
-      System.out.println("Tutor Client");
+//      System.out.println("Tutor Client");
       
 //      final String name = "SBEASTCAL1-31";      
-      final String name = "SB318-10";
+//      final String name = "SB318-10";
 
-//      final String name = args.length > 0 ? args[0] : null;
+      final String name = args.length > 0 ? args[0] : null;
       
       final ComputerNameResolver nameResolver = new OtagoComputerNameResolver(name, "COMPUTERNAME");
 

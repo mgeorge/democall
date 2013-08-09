@@ -182,11 +182,11 @@ public class StudentClient {
    @SuppressWarnings("ResultOfObjectAllocationIgnored")
    public static void main(final String[] args) {
 
-      final String name = "SB318-15";
+//      final String name = "SB318-15";
 //      final String name = "SB317-10";
 //      final String name = "SBEASTCAL1-30";
 
-//      final String name = args.length > 0 ? args[0] : null;
+      final String name = args.length > 0 ? args[0] : null;
 
       final ComputerNameResolver nameResolver = new OtagoComputerNameResolver(name, "COMPUTERNAME");
 
